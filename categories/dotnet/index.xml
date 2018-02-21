@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dotnet on Get Amongst It!!</title>
+    <link>https://blog.merbla.com/categories/dotnet/</link>
+    <description>Recent content in Dotnet on Get Amongst It!!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 02 Jun 2016 23:34:35 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.merbla.com/categories/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DotNet Core RC2, Splunk and Serilog</title>
+      <link>https://blog.merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</link>
+      <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</guid>
+      <description>Over at Serilog, we have been busy over the last few months getting the library ready for the next release of DotNet.
+After some changes to the core library it was time to move our attention to the sinks and enrichers.
+The Splunk sink is now available with RC2 compatibility.
+The packages are Serilog.Sinks.Splunk 2.0.0-rc-xxx and can be sourced from NuGet.
+This now means you can use DotNet, Serilog and Splunk via the HTTP Event Collector on a wide range of platforms.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Get Amongst It!!</title>
+    <link>https://blog.merbla.com/</link>
+    <description>Recent content on Get Amongst It!!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Apr 2017 06:19:52 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.merbla.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting up Octopus Deploy with a Service Principal - Azure CLI</title>
+      <link>https://blog.merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</link>
+      <pubDate>Tue, 18 Apr 2017 06:19:52 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</guid>
+      <description>I just was chatting to my mate Rob Pearson who was giving me some tips on setting up Azure with Octopus Deploy. In my case I was trying to set up a service account to do some deployments. I had already created a service account within my Active Directory with the relevant permissions. Rob pointed me to the Octopus Deploy docoumentation but I was struggling with the Azure Portal.</description>
+    </item>
+    
+    <item>
+      <title>Creating an OSS Splunk App Part 1: Setting up</title>
+      <link>https://blog.merbla.com/2016/11/24/creating-an-oss-splunk-app-part-1-setup/</link>
+      <pubDate>Thu, 24 Nov 2016 21:33:45 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/11/24/creating-an-oss-splunk-app-part-1-setup/</guid>
+      <description>Octocat by jglovier &amp;amp; JohnCreek
+This is the next instalment of series of posts related to building your our Open Source app for [Splunk](). My initial thoughts are over here, and I hope to structure the series as follows:
+ [Part 1 - Setting up a repository and build on Github for a Splunk app](). Part 2 - Getting data into Splunk via an AddOn/Modular Input Part 3 - Securing credentials for an AddOn/Modular Input Part 4 - Dashboards Redux Part 5 - Deployment Considerations Part 6 - Splunk App Certification  Getting Started Many people would probably start hacking away at this point, however I thought I would take a step back and tackle this from a quality point of view.</description>
+    </item>
+    
+    <item>
+      <title>Redux - Octopus Deploy Splunk App</title>
+      <link>https://blog.merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/</link>
+      <pubDate>Mon, 07 Nov 2016 09:53:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/</guid>
+      <description>Over 12 months ago, I released a cutdown version of a Splunk App that targeted Octopus Deploy. I was stoked when I won an award at .conf 2015.
+Since then I have been able to work with a great crew such as Grigori Melnik, Andy Nortrup, Logan, David P. plus many more to release Splunk AppInspect.
+Also, I have had more and more questions and queries about running the Octopus Deploy app in a distributed Splunk environment.</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s Encrypt - Using the Azure CLI to create an Azure AD Application and Service Principal for an Azure Web Service</title>
+      <link>https://blog.merbla.com/2016/10/27/letsencryptazureadappandserviceprincipal/</link>
+      <pubDate>Thu, 27 Oct 2016 10:55:27 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/10/27/letsencryptazureadappandserviceprincipal/</guid>
+      <description>Recently I had to setup a static web site on Azure. At the time I was using an Azure Web App with a rudimentary GitHub deployment. Once setup, the next stage was to add SSL and I wanted to use Let&amp;rsquo;s Encrypt. I stumbled over to the Let&amp;rsquo;s Encrypt Site Extension mentioned in the gooroo blog.
+Most of my time these days is spent on OSX and Docker and I generally use a Docker Container to isolate accounts when using cloud services such as Azure and AWS.</description>
+    </item>
+    
+    <item>
+      <title>Serilog: Log.CloseAndFlush();</title>
+      <link>https://blog.merbla.com/2016/07/06/serilog-log-closeandflush/</link>
+      <pubDate>Wed, 06 Jul 2016 23:35:31 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/07/06/serilog-log-closeandflush/</guid>
+      <description>I have spoken to many people over recent years about their use of Serilog and how it helps their development. One of the most common issues I encounter when people are starting out, relates to the Hello World console app.
+Someone may start out with a simple example using the Literate sink such as the code below.
+static void Main(string[] args) { Log.Logger = new LoggerConfiguration() .WriteTo.LiterateConsole() .CreateLogger(); Log.Information(&amp;quot;Hello World.</description>
+    </item>
+    
+    <item>
+      <title>DotNet Core RC2, Splunk and Serilog</title>
+      <link>https://blog.merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</link>
+      <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</guid>
+      <description>Over at Serilog, we have been busy over the last few months getting the library ready for the next release of DotNet.
+After some changes to the core library it was time to move our attention to the sinks and enrichers.
+The Splunk sink is now available with RC2 compatibility.
+The packages are Serilog.Sinks.Splunk 2.0.0-rc-xxx and can be sourced from NuGet.
+This now means you can use DotNet, Serilog and Splunk via the HTTP Event Collector on a wide range of platforms.</description>
+    </item>
+    
+    <item>
+      <title>Octopus Deploy Template for Splunk Event Collector</title>
+      <link>https://blog.merbla.com/2016/05/17/octopus-deploy-step-template-for-event-collector/</link>
+      <pubDate>Tue, 17 May 2016 06:49:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/05/17/octopus-deploy-step-template-for-event-collector/</guid>
+      <description> Recently I had to revisit an old deployment with Octopus Deploy, and it had been a while&amp;hellip;. I had a requirement to log what was going on to a Splunk instance. Realising I had not shared some previous code, I threw together an Octopus Deploy Step Template for the Splunk Event Collector.
+It is easy to setup&amp;hellip;
+And easy to query in Splunk&amp;hellip; Get Amongst It!! </description>
+    </item>
+    
+    <item>
+      <title>Serilog and Splunk 6.3 - The Event Collector Sink</title>
+      <link>https://blog.merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</link>
+      <pubDate>Mon, 12 Oct 2015 11:34:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</guid>
+      <description>Recently I had the privilege of attending and speaking at Splunk .conf. During the keynote a major announcement was made relating to the way you can get data into Splunk. The new HTTP Event Collector announced in Splunk 6.3 allows for so many new ways of publishing data from IoT, Cloud, pretty much anything that understands HTTP.
+So of course that means an update of the Serilog sink was required.</description>
+    </item>
+    
+    <item>
+      <title>Introducing the Splunk Add-On for Octopus Deploy</title>
+      <link>https://blog.merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</link>
+      <pubDate>Thu, 25 Jun 2015 10:19:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</guid>
+      <description>It&amp;rsquo;s no secret to those who know me well, I enjoy the delight of a seamless deployment. The team over at Octopus Deploy have toiled for a number of years developing a tool and educating the wider .Net community about the benefits of a repeatable deployment.
+Another aspect of tech I love, is structured logging. In particular the detailed visibility it provides into our solutions and what they are really up to.</description>
+    </item>
+    
+    <item>
+      <title>Azure Auditing via PowerShell (Part 1)</title>
+      <link>https://blog.merbla.com/2015/03/17/azure-auditing/</link>
+      <pubDate>Tue, 17 Mar 2015 23:28:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2015/03/17/azure-auditing/</guid>
+      <description>Recently I have been doing a lot of work getting teams comfortable with Cloud solutions. In a certain case, the visibility into what changes were made to an Azure subscription became a paramount requirement. Recently the Azure Preview Portal has added an Audit blade, so the question was&amp;hellip; How does one get this info and distribute to others?
+
+I asked around about how to extract this info and Paul Bouwer sent me this link</description>
+    </item>
+    
+    <item>
+      <title>Using a Texture Atlas with Xamarin</title>
+      <link>https://blog.merbla.com/2014/12/05/using-a-texture-atlas-with-xamarin/</link>
+      <pubDate>Fri, 05 Dec 2014 22:57:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2014/12/05/using-a-texture-atlas-with-xamarin/</guid>
+      <description>Recently I have been doing some work in SpriteKit with Xamarin. I have used Xamarin and its previous incarnations for 5 or so years however I am very new to the world of 2D gaming and SpriteKit.
+In prototyping ideas, I came across the need for using textures within an app to improve performance of animation. One way to achieve this is via creating a Texture Atlas. I found plenty of examples with XCode however not so many with Xamarin.</description>
+    </item>
+    
+    <item>
+      <title>Building a bouldering wall</title>
+      <link>https://blog.merbla.com/2014/11/07/building-a-bouldering-wall/</link>
+      <pubDate>Fri, 07 Nov 2014 23:09:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2014/11/07/building-a-bouldering-wall/</guid>
+      <description>In the last twelve months or so my son has taken an interest in climbing, in particular bouldering. Given his burgeoning desire to climb, I thought I would build a wall under our house. We have a post-war Queensland house typical in suburbs in and around Brisbane.
+So, how was a guy with no construction experience going to achive this task? Well below is a quick wrap of what I got up to.</description>
+    </item>
+    
+    <item>
+      <title>Serilog and the new Splunk Sink</title>
+      <link>https://blog.merbla.com/2014/09/03/serilog-splunk-6-3-event-collector-sink/</link>
+      <pubDate>Wed, 03 Sep 2014 09:43:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2014/09/03/serilog-splunk-6-3-event-collector-sink/</guid>
+      <description>Over the last couple of years, like most in software I have become more and more involved with the &amp;ldquo;DevOps&amp;rdquo; landscape. One product that has been a great help when working with the IoT is Splunk. In my opinion, when dealing with distributed systems that utilise many devices and operating systems, the architecture of Splunk simply stacks up. This post will not go into the details of how Splunk works, rather how you can start utilising it in the world of .</description>
+    </item>
+    
+    <item>
+      <title>Back in the saddle</title>
+      <link>https://blog.merbla.com/2014/08/27/2014/08/27/back-in-the-groove/</link>
+      <pubDate>Wed, 27 Aug 2014 11:26:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2014/08/27/2014/08/27/back-in-the-groove/</guid>
+      <description>It has been a long time since I have been blogging. To be honest, I was off doing other things. Now I am back, ready to share my mistakes with the world in a verbose format.
+Here is hoping that I learn something new along the way.</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://blog.merbla.com/about/</link>
+      <pubDate>Wed, 27 Aug 2014 00:00:00 +1000</pubDate>
+      
+      <guid>https://blog.merbla.com/about/</guid>
+      <description>I am consultant type that has been helping teams deliver solutions in private and government organisations for over 15 years. I live in Brisbane, Australia with my beautiful family and run The Tiny Tech Company with my wife.
+I love my sport and throw code ideas around at Github. You can also find me on Twitter.</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>https://blog.merbla.com/projects/</link>
+      <pubDate>Wed, 27 Aug 2014 00:00:00 +1000</pubDate>
+      
+      <guid>https://blog.merbla.com/projects/</guid>
+      <description>TODO</description>
+    </item>
+    
+    <item>
+      <title>Speaking</title>
+      <link>https://blog.merbla.com/speaking/</link>
+      <pubDate>Wed, 27 Aug 2014 00:00:00 +1000</pubDate>
+      
+      <guid>https://blog.merbla.com/speaking/</guid>
+      <description> I have been fortunate to speak at a number of conferences and user groups. Some of the more recent events and details are below.
+Conferences  API Days (Melbourne) Splunk .conf (Las Vegas) NDC (Sydney) RestFest (Greenville SC) Splunk Live Brisbane Splunk Live Melbourne  Videos  Where&amp;rsquo;s my DevOps API - (InfoQ/API Days) Throw Your Future Self a Lifeline with a Little DevOps Data! - (.conf 2016)  Decks  SpeakerDeck  User Groups  Brisbane Azure User Group DevOps Brisbane User Group Splunk Brisbane User Group  </description>
+    </item>
+    
+  </channel>
+</rss>

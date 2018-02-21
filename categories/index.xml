@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Get Amongst It!!</title>
+    <link>https://blog.merbla.com/categories/</link>
+    <description>Recent content in Categories on Get Amongst It!!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Apr 2017 06:19:52 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.merbla.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Azure</title>
+      <link>https://blog.merbla.com/categories/azure/</link>
+      <pubDate>Tue, 18 Apr 2017 06:19:52 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/categories/azure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Devops</title>
+      <link>https://blog.merbla.com/categories/devops/</link>
+      <pubDate>Tue, 18 Apr 2017 06:19:52 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dotnet</title>
+      <link>https://blog.merbla.com/categories/dotnet/</link>
+      <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/categories/dotnet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Octopusdeploy</title>
+      <link>https://blog.merbla.com/categories/octopusdeploy/</link>
+      <pubDate>Tue, 18 Apr 2017 06:19:52 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/categories/octopusdeploy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Serilog</title>
+      <link>https://blog.merbla.com/categories/serilog/</link>
+      <pubDate>Wed, 06 Jul 2016 23:35:31 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/categories/serilog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Splunk</title>
+      <link>https://blog.merbla.com/categories/splunk/</link>
+      <pubDate>Mon, 07 Nov 2016 09:53:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/categories/splunk/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
