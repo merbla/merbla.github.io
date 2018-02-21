@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Devops on Get Amongst It!!</title>
-    <link>https://blog.merbla.com/tags/devops/</link>
+    <link>https://merbla.com/tags/devops/</link>
     <description>Recent content in Devops on Get Amongst It!!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 18 Apr 2017 06:19:52 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.merbla.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://merbla.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Setting up Octopus Deploy with a Service Principal - Azure CLI</title>
-      <link>https://blog.merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</link>
+      <link>https://merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</link>
       <pubDate>Tue, 18 Apr 2017 06:19:52 +0000</pubDate>
       
-      <guid>https://blog.merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</guid>
+      <guid>https://merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</guid>
       <description>I just was chatting to my mate Rob Pearson who was giving me some tips on setting up Azure with Octopus Deploy. In my case I was trying to set up a service account to do some deployments. I had already created a service account within my Active Directory with the relevant permissions. Rob pointed me to the Octopus Deploy docoumentation but I was struggling with the Azure Portal.</description>
     </item>
     
     <item>
       <title>Introducing the Splunk Add-On for Octopus Deploy</title>
-      <link>https://blog.merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</link>
+      <link>https://merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</link>
       <pubDate>Thu, 25 Jun 2015 10:19:00 +0000</pubDate>
       
-      <guid>https://blog.merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</guid>
+      <guid>https://merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</guid>
       <description>It&amp;rsquo;s no secret to those who know me well, I enjoy the delight of a seamless deployment. The team over at Octopus Deploy have toiled for a number of years developing a tool and educating the wider .Net community about the benefits of a repeatable deployment.
 Another aspect of tech I love, is structured logging. In particular the detailed visibility it provides into our solutions and what they are really up to.</description>
     </item>

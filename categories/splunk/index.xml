@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Splunk on Get Amongst It!!</title>
-    <link>https://blog.merbla.com/categories/splunk/</link>
+    <link>https://merbla.com/categories/splunk/</link>
     <description>Recent content in Splunk on Get Amongst It!!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 07 Nov 2016 09:53:00 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.merbla.com/categories/splunk/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://merbla.com/categories/splunk/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Redux - Octopus Deploy Splunk App</title>
-      <link>https://blog.merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/</link>
+      <link>https://merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/</link>
       <pubDate>Mon, 07 Nov 2016 09:53:00 +0000</pubDate>
       
-      <guid>https://blog.merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/</guid>
+      <guid>https://merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/</guid>
       <description>Over 12 months ago, I released a cutdown version of a Splunk App that targeted Octopus Deploy. I was stoked when I won an award at .conf 2015.
 Since then I have been able to work with a great crew such as Grigori Melnik, Andy Nortrup, Logan, David P. plus many more to release Splunk AppInspect.
 Also, I have had more and more questions and queries about running the Octopus Deploy app in a distributed Splunk environment.</description>
@@ -24,10 +24,10 @@ Also, I have had more and more questions and queries about running the Octopus D
     
     <item>
       <title>DotNet Core RC2, Splunk and Serilog</title>
-      <link>https://blog.merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</link>
+      <link>https://merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</link>
       <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
       
-      <guid>https://blog.merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</guid>
+      <guid>https://merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</guid>
       <description>Over at Serilog, we have been busy over the last few months getting the library ready for the next release of DotNet.
 After some changes to the core library it was time to move our attention to the sinks and enrichers.
 The Splunk sink is now available with RC2 compatibility.
@@ -37,20 +37,20 @@ This now means you can use DotNet, Serilog and Splunk via the HTTP Event Collect
     
     <item>
       <title>Serilog and Splunk 6.3 - The Event Collector Sink</title>
-      <link>https://blog.merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</link>
+      <link>https://merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</link>
       <pubDate>Mon, 12 Oct 2015 11:34:00 +0000</pubDate>
       
-      <guid>https://blog.merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</guid>
+      <guid>https://merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</guid>
       <description>Recently I had the privilege of attending and speaking at Splunk .conf. During the keynote a major announcement was made relating to the way you can get data into Splunk. The new HTTP Event Collector announced in Splunk 6.3 allows for so many new ways of publishing data from IoT, Cloud, pretty much anything that understands HTTP.
 So of course that means an update of the Serilog sink was required.</description>
     </item>
     
     <item>
       <title>Introducing the Splunk Add-On for Octopus Deploy</title>
-      <link>https://blog.merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</link>
+      <link>https://merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</link>
       <pubDate>Thu, 25 Jun 2015 10:19:00 +0000</pubDate>
       
-      <guid>https://blog.merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</guid>
+      <guid>https://merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</guid>
       <description>It&amp;rsquo;s no secret to those who know me well, I enjoy the delight of a seamless deployment. The team over at Octopus Deploy have toiled for a number of years developing a tool and educating the wider .Net community about the benefits of a repeatable deployment.
 Another aspect of tech I love, is structured logging. In particular the detailed visibility it provides into our solutions and what they are really up to.</description>
     </item>
