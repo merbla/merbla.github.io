@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="Matthew Erbs">
+		<meta name="description" content="Get Amongst It!!">
+		<meta name="generator" content="Hugo 0.36" />
+		<title>Serilog and the new Splunk Sink &middot; Get Amongst It!!</title>
+		<link rel="shortcut icon" href="https://blog.merbla.comimages/favicon.ico">
+		<link rel="stylesheet" href="https://blog.merbla.comcss/style.css">
+		<link rel="stylesheet" href="https://blog.merbla.comcss/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://blog.merbla.comcss/font-awesome.min.css">
+		
+
+		
+		<link href="https://blog.merbla.com/index.xml" rel="alternate" type="application/rss+xml" title="Get Amongst It!!" />
+		
+
+		
+
+				
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-54363470-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-54363470-1');
+		</script>
+
+	</head>
+
+
+<body>
+    <nav class="main-nav">
+	
+	
+		<a href='https://blog.merbla.com'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://blog.merbla.composts'>Archive</a>
+	<a href='https://blog.merbla.comprojects'>Projects</a>
+	<a href='https://blog.merbla.comspeaking'>Speaking</a>
+	<a href='https://blog.merbla.comtags'>Tags</a>
+	<a href='https://blog.merbla.comabout'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://blog.merbla.com/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper" class="post">
+        <article>
+            <header>
+                <h1>
+                        Serilog and the new Splunk Sink
+                    </h1>
+                <h2 class="headline">
+                    Sep 3, 2014 09:43
+                    · 863 words
+                    · 5 minute read
+
+                     <span class="tags"></span>
+                    </h2>
+            </header>
+            
+            <section id="post-body">
+                
+
+<p>Over the last couple of years, like most in software I have become more and more involved with the &ldquo;DevOps&rdquo; landscape.  One product that has been a great help when working with the IoT is <a href="http://www.splunk.com/">Splunk</a>.  In my opinion, when dealing with distributed systems that utilise many devices and operating systems, the architecture of <a href="http://www.splunk.com/">Splunk</a> simply stacks up.  This post will not go into the details of how <a href="http://www.splunk.com/">Splunk</a> works, rather how you can start utilising it in the world of .Net.</p>
+
+<p>Day to day I am primarily in the Microsoft space, and as such .Net is a large part of what I do.  In the .Net logging space there have always been the constant libraries (<a href="http://nlog-project.org/">NLog</a>, <a href="http://logging.apache.org/log4net/">Log4Net</a> etc.), however with the introduction of libraries such as <a href="http://serilog.net/">Serilog</a> the .Net community is better understanding the benefits of structured logging.  This is not to say that this was not possible prior to <a href="http://serilog.net/">Serilog</a>, however the barrier to entry and understanding is much lower.</p>
+
+<p>##.Net Options for logging to Splunk</p>
+
+<p>There are a number of options out of the box that can get you up and running with <a href="http://www.splunk.com/">Splunk</a> using either a traditional logging provider or something like <a href="http://serilog.net/">Serilog</a>.</p>
+
+<h3 id="index-a-file">Index a file</h3>
+
+<p>The simplest example of getting up and running is to write to a log file and then use a forwarder or indexer on that file.  Check out <a href="http://docs.splunk.com/Documentation/Splunk/6.1.3/Data/Configureyourinputs">Configuring Data Inputs</a> on how to set up data inputs in Splunk.</p>
+
+<p>When using Serilog, life is quite simple.  Target a rolling file or whatever variant you desire, log the file out to a location that can be accessed by <a href="http://www.splunk.com/">Splunk</a>.</p>
+
+<p>e.g.</p>
+
+<pre><code>var log = new LoggerConfiguration()
+   .WriteTo.RollingFile(&quot;AFile.txt&quot;)
+   .CreateLogger();
+</code></pre>
+
+<p><br/>
+Below is an example output of an indexed file.</p>
+
+<p><img src="/images/2014/Sep/SplunkAndSerilog_RollingFile.PNG" alt="RollingFile" /></p>
+
+<p>##Splunk Sink for Serilog</p>
+
+<p><s>
+There is currently a <a href="http://www.splunk.com/">Splunk</a> sink available for <a href="http://serilog.net/">Serilog</a> however it is built on top of the <strong>old</strong> <a href="http://www.splunk.com/">Splunk</a> SDK package (e.g. <code>Install-Package SplunkSDK</code>).
+</s></p>
+
+<p>Recently, <a href="https://twitter.com/gblock">Glenn Block</a>, <a href="https://twitter.com/gmelnik">Grigori Melnik</a> and the rest of the dev team @ <a href="http://www.splunk.com/">Splunk</a> have re-written the libraries from the ground up.</p>
+
+<p>Get the new awesome sauce <code>Install-Package Splunk.Client</code> and <code>Install-Package Serilog.Sinks.Splunk</code></p>
+
+<p><s>
+<strong>NOTE</strong>: Currently the examples depend on a prerelease package (e.g. <code>Install-Package Splunk.Client -Pre</code>).  This is due to the <a href="http://www.splunk.com/">Splunk</a> PCL package being a beta however it should be generally available sometime this month.
+</s></p>
+
+<p>There are a number of options available to an app targeting either <code>PCL</code> or .net <code>4.5</code> when using the new <a href="http://www.splunk.com/">Splunk</a> Serilog sink.</p>
+
+<ul>
+<li>TCP (not currently available in PCL)</li>
+<li>UDP (not currently available in PCL)</li>
+<li>HTTP/HTTPS (available to both full and PCL)</li>
+</ul>
+
+<p>The sinks follow the <a href="http://serilog.net/">Serilog</a> convention in logging the rendered message, message template and all enriched properties.</p>
+
+<p>As a result, in Splunk you get something like the following.</p>
+
+<div style="background: #e1e1e0;">
+``` 
+{  
+   "Timestamp":"2014-08-30T09:33:19.6642692+10:00",
+   "Level":"Information",
+   "MessageTemplate":"Logging an int, what fun {Item} for {@person} at {thetime}",
+   "RenderedMessage":"Logging an int, what fun 10 for Person { FirstName: \"Jimmy\", LastName: \"Little\", DateOfBirth: 08/30/1938 09:33:19 } at 08/30/2014 09:33:19",
+   "Properties":{  
+      "Item":10,
+      "person":{  
+         "_typeTag":"Person",
+         "FirstName":"Jimmy",
+         "LastName":"Little",
+         "DateOfBirth":"1938-08-30T09:33:19.4025283+10:00"
+      },
+      "thetime":"2014-08-30T09:33:19.6642692+10:00",
+      "ThreadId":11
+   }
+}
+```
+</div>
+
+<p>So to get going, pull in the new sink</p>
+
+<p><s>
+&gt; Install-Package Serilog.Sinks.Splunk -Pre
+</s></p>
+
+<blockquote>
+<p>Install-Package Serilog.Sinks.Splunk</p>
+</blockquote>
+
+<h3 id="via-tcp">Via TCP</h3>
+
+<p>The first thing to do is setup TCP. To do this, check out the steps located in <a href="http://docs.splunk.com/Documentation/Splunk/6.1.3/Data/Configureyourinputs">this link</a>.</p>
+
+<p>For my example, I am using 10001 as my listening TCP port within <a href="http://www.splunk.com/">Splunk</a>.  From there I need to configure <a href="http://serilog.net/">Serilog</a>.</p>
+
+<div style="background: #e1e1e0;">
+```
+var host = "172.16.73.194";
+var tcpPort = 10001;
+
+var log = new LoggerConfiguration()
+               .WriteTo.SplunkViaTcp(host, tcpPort)
+               .CreateLogger();
+```
+</div>
+
+<h3 id="via-udp">Via UDP</h3>
+
+<p>In a very similar fashion to setting up TCP, you need to configure UDP.  The following <a href="http://docs.splunk.com/Documentation/Splunk/6.1.3/Data/Configureyourinputs">link</a> will get you started.</p>
+
+<p>In my example, I have used 10000 as my listening UDP port within <a href="http://www.splunk.com/">Splunk</a>.  After that, I configure <a href="http://serilog.net/">Serilog</a> as below.</p>
+
+<div style="background: #e1e1e0;">
+```
+var host = "172.16.73.194";
+var udpPort = 10001;
+
+var log = new LoggerConfiguration()
+               .WriteTo.SplunkViaUdp(host, udpPort)
+               .CreateLogger();
+```
+</div>
+<br/>
+Below is an example output when logging using TCP.
+
+![Example Logging To TCP](/images/2014/Sep/SplunkAndSerilog_TCP.PNG)
+
+
+
+### Via HTTP/HTTPS
+The final option, and the only one currently available to [Serilog][Serilog] in `PCL` land, is HTTP/HTTPS.  This is great for mobile apps and other occasionally connected devices.  Generally, the [Splunk][Splunk] team recommend logging via a persistent mechanism (file combined with a forwarder) rather than HTTP/HTTPS. This is normally due to the volume of data being logged.
+
+If using a default [Splunk][Splunk] setup, no extra configuration is required.  By default the management port of [Splunk][Splunk] is configured to 8089.  
+
+The following example illustrates how to configure [Serliog][Serilog] to use HTTPS.
+
+<div style="background: #e1e1e0;">
+```
+
+//This is the Splunk SDK context, specifing the scheme, host and port
+
+var host = "172.16.73.209";
+var port = 8089;
+
+var splunkContext = new Context(Scheme.Https, host, port);
+
+//Args are used when pushing to Splunk, 
+var transmitterArgs = new TransmitterArgs
+{
+   transmitterArgs.Source = "My Machine Name",   
+   transmitterArgs.SourceType ="MySplunkTest",
+}
+
+//Serilog Context wrapper 
+var serilogContext = new SplunkContext(
+   splunkContext, 
+   "mysplunktest", 
+   "mySplunkUser", 
+   "mySplunkPassword", 
+   null, 
+   transmitterArgs);
+
+var size = 15;
+var interval = new TimeSpan(0,0,0,5);
+
+//Note the batch size and time span 
+Log.Logger = new LoggerConfiguration()
+   .Enrich.With(new ThreadIdEnricher())
+   .WriteTo.SplunkViaHttp(context, size, interval)
+   .CreateLogger();
+
+```
+</div>
+
+<h2 id="what-next">What Next</h2>
+
+<p>This is just a quick tale indicating how you might get up and running with <a href="http://www.splunk.com/">Splunk</a>. <s> Word is the new <a href="http://www.splunk.com/">Splunk</a> <code>PCL</code> package will be available very soon. </s></p>
+
+<p><strong>GA is OUT!</strong></p>
+
+<h2 id="get-amongst-it">Get Amongst It!!!</h2>
+
+            </section>
+        </article>
+        <span class="tags">
+                      
+                      
+                          
+                              <a href="https://blog.merbla.comtags/serilog">Serilog</a>
+                          
+                              <a href="https://blog.merbla.comtags/splunk">Splunk</a>
+                          
+                      
+                      
+                      </span>
+        </span>   <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'matthewerbs'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+   <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://www.github.com/merbla">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.twitter.com/matthewerbs">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> Matthew Erbs
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+    </section>
+    <script src="https://blog.merbla.comjs/jquery-3.3.1.min.js"></script>
+<script src="https://blog.merbla.comjs/main.js"></script>
+<script src="https://blog.merbla.comjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+
+
+
+
+</body>
+
+</html>

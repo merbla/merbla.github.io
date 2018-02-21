@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="Matthew Erbs">
+		<meta name="description" content="Get Amongst It!!">
+		<meta name="generator" content="Hugo 0.36" />
+		<title>Using a Texture Atlas with Xamarin &middot; Get Amongst It!!</title>
+		<link rel="shortcut icon" href="https://blog.merbla.comimages/favicon.ico">
+		<link rel="stylesheet" href="https://blog.merbla.comcss/style.css">
+		<link rel="stylesheet" href="https://blog.merbla.comcss/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://blog.merbla.comcss/font-awesome.min.css">
+		
+
+		
+		<link href="https://blog.merbla.com/index.xml" rel="alternate" type="application/rss+xml" title="Get Amongst It!!" />
+		
+
+		
+
+				
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-54363470-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-54363470-1');
+		</script>
+
+	</head>
+
+
+<body>
+    <nav class="main-nav">
+	
+	
+		<a href='https://blog.merbla.com'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://blog.merbla.composts'>Archive</a>
+	<a href='https://blog.merbla.comprojects'>Projects</a>
+	<a href='https://blog.merbla.comspeaking'>Speaking</a>
+	<a href='https://blog.merbla.comtags'>Tags</a>
+	<a href='https://blog.merbla.comabout'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://blog.merbla.com/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper" class="post">
+        <article>
+            <header>
+                <h1>
+                        Using a Texture Atlas with Xamarin
+                    </h1>
+                <h2 class="headline">
+                    Dec 5, 2014 22:57
+                    · 300 words
+                    · 2 minute read
+
+                     <span class="tags"></span>
+                    </h2>
+            </header>
+            
+            <section id="post-body">
+                
+
+<p>Recently I have been doing some work in <a href="https://developer.apple.com/library/ios/documentation/GraphicsAnimation/Conceptual/SpriteKit_PG/Introduction/Introduction.html">SpriteKit</a> with Xamarin.  I have used Xamarin and its previous incarnations for 5 or so years however I am very new to the world of 2D gaming and <a href="https://developer.apple.com/library/ios/documentation/GraphicsAnimation/Conceptual/SpriteKit_PG/Introduction/Introduction.html">SpriteKit</a>.</p>
+
+<p>In prototyping ideas, I came across the need for using textures within an app to improve performance of animation.  One way to achieve this is via creating a Texture Atlas.  I found plenty of examples with XCode however not so many with Xamarin.</p>
+
+<p>First lets create a new Xamarin Sprite Kit Project.</p>
+
+<p><img src="/images/2014/Dec/Texture3.png" alt="" /></p>
+
+<p>I have a few images here that I from a recent project, just a telephone that rings.</p>
+
+<p>Add a folder into the project with the .atlas suffix, e.g. MyAwesomeAnimation.atlas.  This will contain all images that should be converted into an animation. In this example, I have a telephone with 7 images.</p>
+
+<p><img src="/images/2014/Dec/Texture2.png" alt="" /></p>
+
+<p><img src="/images/2014/Dec/Texture4.png" alt="" /></p>
+
+<p>Given I have used the <code>File -&gt; New SpriteKit Project</code> in Xamarin Studio, I will just remove the implementation in the <code>MyScene</code> class and replace with the following.</p>
+
+<p>Firstly in the constructor, create the texture atlas.  By convention, the name of the atlas matches the folder in the app.</p>
+
+<pre><code>telephones = SKTextureAtlas.FromName (&quot;Telephone&quot;);
+</code></pre>
+
+<p><br/></p>
+
+<p>Then, to illustrate a simple implementation, when the app is touched, show the animation.</p>
+
+<pre><code>public override void TouchesBegan (NSSet touches, UIEvent evt)
+{ 
+	foreach (var touch in touches) {
+
+		#Get the location and create a sprite to animate
+		var touchLocation = ((UITouch)touch).LocationInNode (this);
+		var telephoneSprite = new SKSpriteNode (&quot;Telephone_1&quot;);
+		telephoneSprite.Position = touchLocation;
+		 
+		#A little awkward, however get the list of image names to then index into the atas
+		var telephoneList = telephones.TextureNames
+			.Select (x =&gt; telephones.TextureNamed (x))
+			.ToArray();
+		 
+		var animationAction = SKAction.AnimateWithTextures (telephoneList, 0.05);
+
+		telephoneSprite.RunAction(SKAction.RepeatActionForever(animationAction));
+
+		AddChild (telephoneSprite);
+		  
+	}
+}
+</code></pre>
+
+<p><br/></p>
+
+<div>
+<iframe src="//player.vimeo.com/video/116104359" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/116104359">SpriteKite Adventures Textures</a> from <a href="http://vimeo.com/user11555947">Matthew Erbs</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+</div>
+
+<p>The simple example is available at <a href="https://github.com/merbla/SpriteKitAdventures">https://github.com/merbla/SpriteKitAdventures</a></p>
+
+<h3 id="get-amongst-it">Get Amongst It!!</h3>
+
+            </section>
+        </article>
+        <span class="tags">
+                      
+                      </span>
+        </span>   <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'matthewerbs'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+   <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://www.github.com/merbla">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.twitter.com/matthewerbs">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> Matthew Erbs
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+    </section>
+    <script src="https://blog.merbla.comjs/jquery-3.3.1.min.js"></script>
+<script src="https://blog.merbla.comjs/main.js"></script>
+<script src="https://blog.merbla.comjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure on Get Amongst It!!</title>
+    <link>https://blog.merbla.com/tags/azure/</link>
+    <description>Recent content in Azure on Get Amongst It!!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Apr 2017 06:19:52 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.merbla.com/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting up Octopus Deploy with a Service Principal - Azure CLI</title>
+      <link>https://blog.merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</link>
+      <pubDate>Tue, 18 Apr 2017 06:19:52 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</guid>
+      <description>I just was chatting to my mate Rob Pearson who was giving me some tips on setting up Azure with Octopus Deploy. In my case I was trying to set up a service account to do some deployments. I had already created a service account within my Active Directory with the relevant permissions. Rob pointed me to the Octopus Deploy docoumentation but I was struggling with the Azure Portal.</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s Encrypt - Using the Azure CLI to create an Azure AD Application and Service Principal for an Azure Web Service</title>
+      <link>https://blog.merbla.com/2016/10/27/letsencryptazureadappandserviceprincipal/</link>
+      <pubDate>Thu, 27 Oct 2016 10:55:27 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2016/10/27/letsencryptazureadappandserviceprincipal/</guid>
+      <description>Recently I had to setup a static web site on Azure. At the time I was using an Azure Web App with a rudimentary GitHub deployment. Once setup, the next stage was to add SSL and I wanted to use Let&amp;rsquo;s Encrypt. I stumbled over to the Let&amp;rsquo;s Encrypt Site Extension mentioned in the gooroo blog.
+Most of my time these days is spent on OSX and Docker and I generally use a Docker Container to isolate accounts when using cloud services such as Azure and AWS.</description>
+    </item>
+    
+    <item>
+      <title>Azure Auditing via PowerShell (Part 1)</title>
+      <link>https://blog.merbla.com/2015/03/17/azure-auditing/</link>
+      <pubDate>Tue, 17 Mar 2015 23:28:00 +0000</pubDate>
+      
+      <guid>https://blog.merbla.com/2015/03/17/azure-auditing/</guid>
+      <description>Recently I have been doing a lot of work getting teams comfortable with Cloud solutions. In a certain case, the visibility into what changes were made to an Azure subscription became a paramount requirement. Recently the Azure Preview Portal has added an Audit blade, so the question was&amp;hellip; How does one get this info and distribute to others?
+
+I asked around about how to extract this info and Paul Bouwer sent me this link</description>
+    </item>
+    
+  </channel>
+</rss>
