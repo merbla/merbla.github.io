@@ -1,68 +1,55 @@
-+==================================================================
-+https://keybase.io/matthewerbs
-+--------------------------------------------------------------------
-+
-+I hereby claim:
-+
-+  * I am an admin of http://merbla.com
-+  * I am matthewerbs (https://keybase.io/matthewerbs) on keybase.
-+  * I have a public key with fingerprint 058E EE74 3C70 A91F E9D5  FC2F FDC5 410E 313D 0DA3
-+
-+To do so, I am signing this object:
-+
-+{
-+    "body": {
-+        "key": {
-+            "eldest_kid": "010142bdc87c78098b1fc2aba345f98731c3f8ad023dc552cc124a8360cc761714c40a",
-+            "fingerprint": "058eee743c70a91fe9d5fc2ffdc5410e313d0da3",
-+            "host": "keybase.io",
-+            "key_id": "fdc5410e313d0da3",
-+            "kid": "010142bdc87c78098b1fc2aba345f98731c3f8ad023dc552cc124a8360cc761714c40a",
-+            "uid": "d69c19c2cfb5d164e7ee86ae3152fd19",
-+            "username": "matthewerbs"
-+        },
-+        "service": {
-+            "hostname": "merbla.com",
-+            "protocol": "http:"
-+        },
-+        "type": "web_service_binding",
-+        "version": 1
-+    },
-+    "ctime": 1459999293,
-+    "expire_in": 157680000,
-+    "prev": "66700e8e83d44348fe7b380bed030b5851f19c15c766dcca6ab6f3b34a729c29",
-+    "seqno": 21,
-+    "tag": "signature"
-+}
-+
-+which yields the signature:
-+
-+-----BEGIN PGP MESSAGE-----
-+Version: Keybase OpenPGP v2.0.53
-+Comment: https://keybase.io/crypto
-+
-+yMInAnicrVJZSBVRGL5qq7T4YBA9RI1JhreYM2eWM5cEbaOFElspguuZc87cO6l3
-+rjNztYWSDNswqIgKCdLMRIqgHtJKymwnWm4uBBb0IBEuYT1EL2pnpN567H85nP//
-+vu///p//ycy0QHrK6NOCWSBvZmPKq0cXE4Edk9/nHRAMm+4TQgeEEjbxsFLKXC9c
-+YlEhJIhABLJkUII0oiFRRwYwiYQNDGXF1JEGAYEmwlSUICWKIhECJBkjqIqEaCrQ
-+gExkEQtBwbRiEebEHSvm+bIKYoxpMiSaiHVgMp0qXNc0uYgMRAYBpCLFkBOjtusz
-+uDkDu2yZZfMc/4Qn7P0D/599JybkqKoToBOJmIZCgSozjTGkYt5XkUwKdB/oMieG
-+yxhHl2HPi7JK5hiucDAo8EKFRZi/W3+YvyBeLsXLiF3GyXHH9mxil/J81PPiIZ/m
-+7Yv7uEpmhP8ohA0rRvkeOaGCOa5lx4QQ4EjiWb4kkBWdh6TDoMD2xi2HhS0foWgq
-+Enn4bVgFl1RVTRQZYghSWYYyMplmQCQajIpQNBSkAJMPCxS+CZUSglVsqCY0oIw1
-+iS/Bn9Zl5TFbCEmA+8QRrulakRj2Eg4TDnZ27J4USEkPTJmc6h9YIH16xt+zK8LT
-+Ag2jnV+fxy9Hdzq3fi5JnsroatrUmZof6fjYvPjI97S8NV+ueS2RBzefFK4AdR/e
-+ZB+vLsi62z7ePKln/+3WUEsguXjt1l/n5udmfqtZf/bEyWRbLtxTLsCHWbVS9Ybu
-+11O39lxDRZnu0Xs5hzKXSm3bFi0vLu26nzOnfOhK8Rzw9nPNvOil4NALex2KVd15
-+570c6x68k5OobbixsClre8FA74g9W+gdU4uejQxW1axaubF+vKa2yDnTlrWlfmBv
-+gqYfK8zendN+bGNfQ2v+4Hj22b5zfXpwEDU2zh3ur1ud/LRAqjq/+YJ17+quK4Vi
-+x5QIfvzjcOt4//LmZHj49KKKGdd/A/+YQaE=
-+=A0YN
-+-----END PGP MESSAGE-----
-+
-+And finally, I am proving ownership of this host by posting or
-+appending to this document.
-+
-+View my publicly-auditable identity here: https://keybase.io/matthewerbs
-+
-+==================================================================
+==================================================================
+https://keybase.io/matthewerbs
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://merbla.com
+  * I am matthewerbs (https://keybase.io/matthewerbs) on keybase.
+  * I have a public key ASDWoa2MqOSAnhH8_zlY0Dp8l75tCup9yPfhW4HqtSfLnAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010142bdc87c78098b1fc2aba345f98731c3f8ad023dc552cc124a8360cc761714c40a",
+      "host": "keybase.io",
+      "kid": "0120d6a1ad8ca8e4809e11fcff3958d03a7c97be6d0aea7dc8f7e15b81eab527cb9c0a",
+      "uid": "d69c19c2cfb5d164e7ee86ae3152fd19",
+      "username": "matthewerbs"
+    },
+    "merkle_root": {
+      "ctime": 1519268530,
+      "hash": "5e70d5e03a4bbb5021ba265183d7f9771641e1459fc94aa0bf8655ad7838424d0aa4222335551e53084a01129ff99c1d701cebfebbd2237f6f48eac1c9eb5e5d",
+      "hash_meta": "79707dc217419b768de16b9f4579931c0c57acc9414b4816fea15fc47905c4e7",
+      "seqno": 2135853
+    },
+    "service": {
+      "hostname": "merbla.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.41"
+  },
+  "ctime": 1519268546,
+  "expire_in": 504576000,
+  "prev": "8475446a2b0fa0776b7c215a8d79caec4b855eb72e442210ff7327ffd84cbbc2",
+  "seqno": 28,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg1qGtjKjkgJ4R/P85WNA6fJe+bQrqfcj34VuB6rUny5wKp3BheWxvYWTFA0Z7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxNDJiZGM4N2M3ODA5OGIxZmMyYWJhMzQ1Zjk4NzMxYzNmOGFkMDIzZGM1NTJjYzEyNGE4MzYwY2M3NjE3MTRjNDBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZDZhMWFkOGNhOGU0ODA5ZTExZmNmZjM5NThkMDNhN2M5N2JlNmQwYWVhN2RjOGY3ZTE1YjgxZWFiNTI3Y2I5YzBhIiwidWlkIjoiZDY5YzE5YzJjZmI1ZDE2NGU3ZWU4NmFlMzE1MmZkMTkiLCJ1c2VybmFtZSI6Im1hdHRoZXdlcmJzIn0sIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNTE5MjY4NTMwLCJoYXNoIjoiNWU3MGQ1ZTAzYTRiYmI1MDIxYmEyNjUxODNkN2Y5NzcxNjQxZTE0NTlmYzk0YWEwYmY4NjU1YWQ3ODM4NDI0ZDBhYTQyMjIzMzU1NTFlNTMwODRhMDExMjlmZjk5YzFkNzAxY2ViZmViYmQyMjM3ZjZmNDhlYWMxYzllYjVlNWQiLCJoYXNoX21ldGEiOiI3OTcwN2RjMjE3NDE5Yjc2OGRlMTZiOWY0NTc5OTMxYzBjNTdhY2M5NDE0YjQ4MTZmZWExNWZjNDc5MDVjNGU3Iiwic2Vxbm8iOjIxMzU4NTN9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoibWVyYmxhLmNvbSIsInByb3RvY29sIjoiaHR0cHM6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjQxIn0sImN0aW1lIjoxNTE5MjY4NTQ2LCJleHBpcmVfaW4iOjUwNDU3NjAwMCwicHJldiI6Ijg0NzU0NDZhMmIwZmEwNzc2YjdjMjE1YThkNzljYWVjNGI4NTVlYjcyZTQ0MjIxMGZmNzMyN2ZmZDg0Y2JiYzIiLCJzZXFubyI6MjgsInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RAFrS5I11tuBCRc99+au81sgnTK4o+d6Xo46BqzITbJiwdpl77iMDn3/OgJj5GYyb49ICA5YIHIoSQsAG4T3TKBqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIK2x0auvwjX5WemKqXyDzXM6bTQhjjX/x1BkYv3pIL9oo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/matthewerbs
+
+==================================================================
