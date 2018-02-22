@@ -1,288 +1,433 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<meta name="author" content="Matthew Erbs">
-		<meta name="description" content="Get Amongst It!!">
-		<meta name="generator" content="Hugo 0.36" />
-		<title>Let&#39;s Encrypt - Using the Azure CLI to create an Azure AD Application and Service Principal for an Azure Web Service &middot; Get Amongst It!!</title>
-		<link rel="shortcut icon" href="https://merbla.com/images/favicon.ico">
-		<link rel="stylesheet" href="https://merbla.com/css/style.css">
-		<link rel="stylesheet" href="https://merbla.com/css/highlight.css">
+<html lang='en'>
 
-		
-		<link rel="stylesheet" href="https://merbla.com/css/font-awesome.min.css">
-		
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Everyone gets SSL'>
 
-		
-		<link href="https://merbla.com/index.xml" rel="alternate" type="application/rss+xml" title="Get Amongst It!!" />
-		
+<meta property='og:title' content='Let&#39;s Encrypt - Using the Azure CLI to create an Azure AD Application and Service Principal for an Azure Web Service • Get Amongst It!'>
+<meta property='og:description' content='Everyone gets SSL'>
+<meta property='og:url' content='http://www.example.com/2016/10/27/letsencryptazureadappandserviceprincipal/'>
+<meta property='og:site_name' content='Get Amongst It!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='azure'><meta property='article:tag' content='powershell'><meta property='article:tag' content='cli'><meta property='article:tag' content='webapp'><meta property='article:tag' content='activedirectory'><meta property='article:tag' content='ad'><meta property='article:published_time' content='2016-10-27T10:55:27Z'/><meta property='article:modified_time' content='2016-10-27T10:55:27Z'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
 
-		
-	</head>
+<meta name="generator" content="Hugo 0.36" />
 
-    <body>
-       <nav class="main-nav">
-	
-	
-		<a href='https://merbla.com/'> <span class="arrow">←</span>Home</a>
-	
-	
-	<a href='https://merbla.com/posts/'>Archive</a>
-	<a href='https://merbla.com/tags/'>Tags</a>
-	<a href='https://merbla.com/speaking/'>Speaking</a>
-	<a href='https://merbla.com/about/'>About</a>	
+  <title>Let&#39;s Encrypt - Using the Azure CLI to create an Azure AD Application and Service Principal for an Azure Web Service • Get Amongst It!</title>
+  <link rel='canonical' href='http://www.example.com/2016/10/27/letsencryptazureadappandserviceprincipal/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.9efb8af6.css'><link rel='stylesheet' href='/assets/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-54363470-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
 
-	
-
-	
+</head>
 
 
+<body class='page type-posts has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    Get Amongst It!
+    </h2>
+    <div class='desc'>
+    Matthew&#39;s Musings
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/serilog' style='font-size:1.5em'>Serilog</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:2em'>Splunk</a>
+      </li><li>
+        <a href='/tags/activedirectory' style='font-size:1em'>Activedirectory</a>
+      </li><li>
+        <a href='/tags/ad' style='font-size:1em'>Ad</a>
+      </li><li>
+        <a href='/tags/azure' style='font-size:1.3333333333333333em'>Azure</a>
+      </li><li>
+        <a href='/tags/beginner' style='font-size:1em'>Beginner</a>
+      </li><li>
+        <a href='/tags/bouldering' style='font-size:1em'>Bouldering</a>
+      </li><li>
+        <a href='/tags/cli' style='font-size:1em'>Cli</a>
+      </li><li>
+        <a href='/tags/climbing' style='font-size:1em'>Climbing</a>
+      </li><li>
+        <a href='/tags/devops' style='font-size:1.1666666666666667em'>Devops</a>
+      </li><li>
+        <a href='/tags/dotnet' style='font-size:1em'>Dotnet</a>
+      </li><li>
+        <a href='/tags/github' style='font-size:1em'>Github</a>
+      </li><li>
+        <a href='/tags/octopusdeploy' style='font-size:1.6666666666666665em'>Octopusdeploy</a>
+      </li><li>
+        <a href='/tags/opensource' style='font-size:1em'>Opensource</a>
+      </li><li>
+        <a href='/tags/oss' style='font-size:1em'>Oss</a>
+      </li><li>
+        <a href='/tags/powershell' style='font-size:1.1666666666666667em'>Powershell</a>
+      </li><li>
+        <a href='/tags/webapp' style='font-size:1em'>Webapp</a>
+      </li></ul>
+</div>
 
 
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/about'>About</a>
+      </li><li class='item'>
+        <a href='/speaking'>Speaking</a>
+      </li></ul>
+  </div>
 </nav>
 
 
-        <section id="wrapper" class="post">
-            <article>
-                <header>
-                    <h1>
-                        Let&#39;s Encrypt - Using the Azure CLI to create an Azure AD Application and Service Principal for an Azure Web Service
-                    </h1>
-                    <h2 class="headline">
-                    Oct 27, 2016 10:55
-                    · 386 words
-                    · 2 minute read
-                    <p></p>
-         
-                    </h2>
-                </header>
-                
-                <section id="post-body">
-                    <p>Recently I had to setup a static web site on Azure.  At the time I was using an <a href="https://azure.microsoft.com/en-us/services/app-service/web/">Azure Web App</a> with a rudimentary GitHub deployment.  Once setup, the next stage was to add SSL and I wanted to use <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>.  I stumbled over to the <a href="https://github.com/sjkp/letsencrypt-siteextension">Let&rsquo;s Encrypt Site Extension</a> mentioned in the <a href="https://gooroo.io/GoorooTHINK/Article/16420/Lets-Encrypt-Azure-Web-Apps-the-Free-and-Easy-Way/21872#.WBGaaOF97Oa">gooroo</a> blog.</p>
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+ 
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Let&#39;s Encrypt - Using the Azure CLI to create an Azure AD Application and Service Principal for an Azure Web Service</h1>
+      
+<p class='desc'>Everyone gets SSL</p>
+
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2016-10-27T10:55:27Z'>2016, Oct 27</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p>Recently I had to setup a static web site on Azure.  At the time I was using an <a href="https://azure.microsoft.com/en-us/services/app-service/web/" target="_blank">Azure Web App</a> with a rudimentary GitHub deployment.  Once setup, the next stage was to add SSL and I wanted to use <a href="https://letsencrypt.org/" target="_blank">Let&rsquo;s Encrypt</a>.  I stumbled over to the <a href="https://github.com/sjkp/letsencrypt-siteextension" target="_blank">Let&rsquo;s Encrypt Site Extension</a> mentioned in the <a href="https://gooroo.io/GoorooTHINK/Article/16420/Lets-Encrypt-Azure-Web-Apps-the-Free-and-Easy-Way/21872#.WBGaaOF97Oa" target="_blank">gooroo</a> blog.</p>
 
 <p>Most of my time these days is spent on OSX and Docker and I generally use a Docker Container to isolate accounts when using cloud services such as Azure and AWS.</p>
 
-<p>One of the steps in the blog post was to setup an <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/">Azure Service Principal</a> for the WebJob to use.  The post mentions how to do this in PowerShell however I generally use the <a href="https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/">Azure CLI</a> as it is cross platform.</p>
+<p>One of the steps in the blog post was to setup an <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/" target="_blank">Azure Service Principal</a> for the WebJob to use.  The post mentions how to do this in PowerShell however I generally use the <a href="https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/" target="_blank">Azure CLI</a> as it is cross platform.</p>
 
-<p>One of my favourite tools to work with JSON is <a href="https://stedolan.github.io/jq/">jq</a> and some of the samples below will make use it.  So here are the same steps in the <a href="https://gooroo.io/GoorooTHINK/Article/16420/Lets-Encrypt-Azure-Web-Apps-the-Free-and-Easy-Way/21872#.WBGaaOF97Oa">post</a> using the Azure CLI.</p>
+<p>One of my favourite tools to work with JSON is <a href="https://stedolan.github.io/jq/" target="_blank">jq</a> and some of the samples below will make use it.  So here are the same steps in the <a href="https://gooroo.io/GoorooTHINK/Article/16420/Lets-Encrypt-Azure-Web-Apps-the-Free-and-Easy-Way/21872#.WBGaaOF97Oa" target="_blank">post</a> using the Azure CLI.</p>
 
 <p><strong>Login to Azure</strong></p>
 
 <p><em>PowerShell</em></p>
-
-<pre><code class="language-PowerShell">Login-AzureRmAccount
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Login-AzureRmAccount</code></pre></div>
 <p><em>Azure CLI</em></p>
-
-<pre><code class="language-bash">azure login
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">azure login</code></pre></div>
 <p><strong>Set some variables</strong></p>
 
 <p><em>PowerShell</em></p>
-
-<pre><code class="language-PowerShell">$uri = 'https://mysite.com'
-$password = 'SuperSecret'
-$appName = 'mysite'
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$uri = <span style="color:#e6db74">&#39;https://mysite.com&#39;</span>
+$password = <span style="color:#e6db74">&#39;SuperSecret&#39;</span>
+$appName = <span style="color:#e6db74">&#39;mysite&#39;</span></code></pre></div>
 <p><em>Azure CLI</em></p>
-
-<pre><code class="language-bash">export APP_URI=https://mysite.com
-export APP_PASSORD=SuperSecret
-export APP_NAME=mysite
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export APP_URI<span style="color:#f92672">=</span>https://mysite.com
+export APP_PASSORD<span style="color:#f92672">=</span>SuperSecret
+export APP_NAME<span style="color:#f92672">=</span>mysite</code></pre></div>
 <p><strong>Create an Azure Active Directory Application</strong></p>
 
 <p><em>PowerShell</em></p>
-
-<pre><code class="language-PowerShell">$app = New-AzureRmADApplication -DisplayName {some display name} -HomePage $uri -IdentifierUris $uri -Password $password
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$app = New-AzureRmADApplication -DisplayName {some display name} -HomePage $uri -IdentifierUris $uri -Password $password</code></pre></div>
 <p><em>Azure CLI</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create the app
+</span><span style="color:#75715e"></span>azure ad app create -n $APP_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --home-page $APP_URI <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --identifier-uris $APP_URI <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --password $APP_PASSORD
 
-<pre><code class="language-bash"># Create the app
-azure ad app create -n $APP_NAME \
-    --home-page $APP_URI \
-    --identifier-uris $APP_URI \
-    --password $APP_PASSORD
-
-# Find the app
-azure ad app list --json | jq --arg name &quot;${APP_NAME}&quot; '.[] | select(.displayName==$name)'
-</code></pre>
-
+<span style="color:#75715e"># Find the app
+</span><span style="color:#75715e"></span>azure ad app list --json | jq --arg name <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>APP_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;.[] | select(.displayName==$name)&#39;</span></code></pre></div>
 <p>This will return a JSON object such as:</p>
-
-<pre><code class="language-Javascript">[
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript">[
   {
-    &quot;objectId&quot;: &quot;xxxx&quot;,
-    &quot;objectType&quot;: &quot;Application&quot;,
-    &quot;appId&quot;: &quot;xxxx&quot;,
-    &quot;availableToOtherTenants&quot;: false,
-    &quot;displayName&quot;: &quot;mysite.com&quot;,
-    &quot;identifierUris&quot;: [
-      &quot;https://mysite.com&quot;
+    <span style="color:#e6db74">&#34;objectId&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;xxxx&#34;</span>,
+    <span style="color:#e6db74">&#34;objectType&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Application&#34;</span>,
+    <span style="color:#e6db74">&#34;appId&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;xxxx&#34;</span>,
+    <span style="color:#e6db74">&#34;availableToOtherTenants&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+    <span style="color:#e6db74">&#34;displayName&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;mysite.com&#34;</span>,
+    <span style="color:#e6db74">&#34;identifierUris&#34;</span><span style="color:#f92672">:</span> [
+      <span style="color:#e6db74">&#34;https://mysite.com&#34;</span>
     ],
-    &quot;replyUrls&quot;: [],
-    &quot;homepage&quot;: &quot;https://mysite.com&quot;
+    <span style="color:#e6db74">&#34;replyUrls&#34;</span><span style="color:#f92672">:</span> [],
+    <span style="color:#e6db74">&#34;homepage&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://mysite.com&#34;</span>
   }
-]
-</code></pre>
-
+]</code></pre></div>
 <p><strong>Create a Service Principal for the app</strong></p>
 
 <p><em>PowerShell</em></p>
-
-<pre><code class="language-PowerShell">New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">New-AzureRmADServicePrincipal -ApplicationId $app.ApplicationId</code></pre></div>
 <p><em>Azure CLI</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">azure ad sp create -a $APP_ID
 
-<pre><code class="language-bash">azure ad sp create -a $APP_ID
-
-#Find the principal
-azure ad sp list --json | jq --arg name &quot;${APP_NAME}&quot; '.[] | select(.displayName==$name)'
-</code></pre>
-
+<span style="color:#75715e">#Find the principal
+</span><span style="color:#75715e"></span>azure ad sp list --json | jq --arg name <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>APP_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;.[] | select(.displayName==$name)&#39;</span></code></pre></div>
 <p>This will return a JSON object such as:</p>
-
-<pre><code class="language-Javascript">{
-  &quot;objectId&quot;: &quot;xxxx&quot;,
-  &quot;objectType&quot;: &quot;ServicePrincipal&quot;,
-  &quot;displayName&quot;: &quot;mysite.com&quot;,
-  &quot;appId&quot;: &quot;xxxx&quot;,
-  &quot;servicePrincipalNames&quot;: [
-    &quot;https://mysite.com&quot;,
-    &quot;xxxx&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript">{
+  <span style="color:#e6db74">&#34;objectId&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;xxxx&#34;</span>,
+  <span style="color:#e6db74">&#34;objectType&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;ServicePrincipal&#34;</span>,
+  <span style="color:#e6db74">&#34;displayName&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;mysite.com&#34;</span>,
+  <span style="color:#e6db74">&#34;appId&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;xxxx&#34;</span>,
+  <span style="color:#e6db74">&#34;servicePrincipalNames&#34;</span><span style="color:#f92672">:</span> [
+    <span style="color:#e6db74">&#34;https://mysite.com&#34;</span>,
+    <span style="color:#e6db74">&#34;xxxx&#34;</span>
   ]
-}
-</code></pre>
-
+}</code></pre></div>
 <p><strong>Add the Contributor role to the Application</strong></p>
 
 <p><em>PowerShell</em></p>
-
-<pre><code class="language-PowerShell">New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $app.ApplicationId
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $app.ApplicationId</code></pre></div>
 <p><em>Azure CLI</em></p>
-
-<pre><code class="language-bash"># $APP_OBJECT_ID == objectid of the ServicePrincipal
-azure role assignment create --objectId $APP_OBJECT_ID --roleName Contributor
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># $APP_OBJECT_ID == objectid of the ServicePrincipal
+</span><span style="color:#75715e"></span>azure role assignment create --objectId $APP_OBJECT_ID --roleName Contributor</code></pre></div>
 <p>Sometime PowerShell is easier, sometimes it is not.  However it&rsquo;s always nice to have options.</p>
 
 <p><strong>Get Amongst it!</strong></p>
 
-                </section>
-            </article>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/azure'>Azure</a>, <a class='tag' href='/tags/powershell'>Powershell</a>, <a class='tag' href='/tags/cli'>Cli</a>, <a class='tag' href='/tags/webapp'>Webapp</a>, <a class='tag' href='/tags/activedirectory'>Activedirectory</a>, <a class='tag' href='/tags/ad'>Ad</a></div>
+
+  </div>
+</footer>
 
 
-              <span class="tags">
-                tags:
-                      
-                      
-                          
-                              <a href="https://merbla.com/tags/azure">azure</a>
-                          
-                              <a href="https://merbla.com/tags/powershell">powershell</a>
-                          
-                              <a href="https://merbla.com/tags/cli">cli</a>
-                          
-                              <a href="https://merbla.com/tags/webapp">webapp</a>
-                          
-                              <a href="https://merbla.com/tags/activedirectory">activedirectory</a>
-                          
-                              <a href="https://merbla.com/tags/ad">ad</a>
-                          
-                      
-                      
-              </span>
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/2016/07/06/serilog-log-closeandflush/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Serilog: Log.CloseAndFlush();</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/2016/11/07/redux-octopus-deploy-splunk-app/'>
+        <span class='screen-reader-text'>Next post: </span>Redux - Octopus Deploy Splunk App<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
 
 
-            
-            <p></p>
-             <span class="tags">
-              <a class="cta" href="https://merbla.com/index.xml">Subscribe</a>
-               </span>
-            
-
-        
-            
-
-            
-                <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'merbla-com'; 
-
-     
+<section class='comments'>
+  <div class='container sep-before'>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "merbla-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2018 Matthew Erbs </p>
 </div>
 
-            
+        </div>
+      </footer>
 
-            
+    </div>
+  </div><div class='sidebar-overlay'></div><script src='/assets/js/main.89545a27.js'></script></body>
 
-            <footer id="footer">
-    
-        <div id="social">
-
-	
-	
-    <a class="symbol" href="https://www.github.com/merbla">
-        <i class="fa fa-github-square"></i>
-    </a>
-    
-    <a class="symbol" href="https://www.instagram.com/matthewerbs/">
-        <i class="fa fa-instagram"></i>
-    </a>
-    
-    <a class="symbol" href="https://www.twitter.com/matthewerbs">
-        <i class="fa fa-twitter-square"></i>
-    </a>
-    
-
-
-</div>
-
-    
-    <p class="small">
-    
-       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> Matthew Erbs
-    
-    </p>
-    <p class="small">
-        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
-    </p>
-
-    
-</footer>
-
-        </section>
-
-        <script src="https://merbla.com/js/jquery-3.3.1.min.js"></script>
-<script src="https://merbla.com/js/main.js"></script>
-<script src="https://merbla.com/js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-
-    </body>
 </html>
+

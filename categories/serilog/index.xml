@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Serilog on Get Amongst It!!</title>
-    <link>https://merbla.com/categories/serilog/</link>
-    <description>Recent content in Serilog on Get Amongst It!!</description>
+    <title>Serilog on Get Amongst It!</title>
+    <link>http://www.example.com/categories/serilog/</link>
+    <description>Recent content in Serilog on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
     <lastBuildDate>Wed, 06 Jul 2016 23:35:31 +0000</lastBuildDate>
     
-	<atom:link href="https://merbla.com/categories/serilog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.example.com/categories/serilog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Serilog: Log.CloseAndFlush();</title>
-      <link>https://merbla.com/2016/07/06/serilog-log-closeandflush/</link>
+      <link>http://www.example.com/2016/07/06/serilog-log-closeandflush/</link>
       <pubDate>Wed, 06 Jul 2016 23:35:31 +0000</pubDate>
       
-      <guid>https://merbla.com/2016/07/06/serilog-log-closeandflush/</guid>
+      <guid>http://www.example.com/2016/07/06/serilog-log-closeandflush/</guid>
       <description>I have spoken to many people over recent years about their use of Serilog and how it helps their development. One of the most common issues I encounter when people are starting out, relates to the Hello World console app.
 Someone may start out with a simple example using the Literate sink such as the code below.
 static void Main(string[] args) { Log.Logger = new LoggerConfiguration() .WriteTo.LiterateConsole() .CreateLogger(); Log.Information(&amp;quot;Hello World.</description>
@@ -24,10 +23,10 @@ static void Main(string[] args) { Log.Logger = new LoggerConfiguration() .WriteT
     
     <item>
       <title>DotNet Core RC2, Splunk and Serilog</title>
-      <link>https://merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</link>
+      <link>http://www.example.com/2016/06/02/dotnet-core-splunk-and-serilog/</link>
       <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
       
-      <guid>https://merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</guid>
+      <guid>http://www.example.com/2016/06/02/dotnet-core-splunk-and-serilog/</guid>
       <description>Over at Serilog, we have been busy over the last few months getting the library ready for the next release of DotNet.
 After some changes to the core library it was time to move our attention to the sinks and enrichers.
 The Splunk sink is now available with RC2 compatibility.
@@ -37,10 +36,10 @@ This now means you can use DotNet, Serilog and Splunk via the HTTP Event Collect
     
     <item>
       <title>Serilog and Splunk 6.3 - The Event Collector Sink</title>
-      <link>https://merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</link>
+      <link>http://www.example.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</link>
       <pubDate>Mon, 12 Oct 2015 11:34:00 +0000</pubDate>
       
-      <guid>https://merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</guid>
+      <guid>http://www.example.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</guid>
       <description>Recently I had the privilege of attending and speaking at Splunk .conf. During the keynote a major announcement was made relating to the way you can get data into Splunk. The new HTTP Event Collector announced in Splunk 6.3 allows for so many new ways of publishing data from IoT, Cloud, pretty much anything that understands HTTP.
 So of course that means an update of the Serilog sink was required.</description>
     </item>

@@ -3,247 +3,245 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://merbla.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</loc>
+    <loc>http://www.example.com/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/</loc>
     <lastmod>2017-04-18T06:19:52+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2016/11/24/creating-an-oss-splunk-app-part-1-setup/</loc>
+    <loc>http://www.example.com/2016/11/24/creating-an-oss-splunk-app-part-1-setup/</loc>
     <lastmod>2016-11-24T21:33:45+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/</loc>
+    <loc>http://www.example.com/2016/11/07/redux-octopus-deploy-splunk-app/</loc>
     <lastmod>2016-11-07T09:53:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2016/10/27/letsencryptazureadappandserviceprincipal/</loc>
+    <loc>http://www.example.com/2016/10/27/letsencryptazureadappandserviceprincipal/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2016/07/06/serilog-log-closeandflush/</loc>
+    <loc>http://www.example.com/2016/07/06/serilog-log-closeandflush/</loc>
     <lastmod>2016-07-06T23:35:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2016/06/02/dotnet-core-splunk-and-serilog/</loc>
+    <loc>http://www.example.com/2016/06/02/dotnet-core-splunk-and-serilog/</loc>
     <lastmod>2016-06-02T23:34:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2016/05/17/octopus-deploy-step-template-for-event-collector/</loc>
+    <loc>http://www.example.com/2016/05/17/octopus-deploy-step-template-for-event-collector/</loc>
     <lastmod>2016-05-17T06:49:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</loc>
+    <loc>http://www.example.com/2015/10/12/serilog-splunk-6-3-event-collector-sink-2/</loc>
     <lastmod>2015-10-12T11:34:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</loc>
+    <loc>http://www.example.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</loc>
     <lastmod>2015-06-25T10:19:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2015/03/17/azure-auditing/</loc>
+    <loc>http://www.example.com/2015/03/17/azure-auditing/</loc>
     <lastmod>2015-03-17T23:28:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2014/12/05/using-a-texture-atlas-with-xamarin/</loc>
+    <loc>http://www.example.com/2014/12/05/using-a-texture-atlas-with-xamarin/</loc>
     <lastmod>2014-12-05T22:57:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2014/11/07/building-a-bouldering-wall/</loc>
+    <loc>http://www.example.com/2014/11/07/building-a-bouldering-wall/</loc>
     <lastmod>2014-11-07T23:09:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2014/09/03/serilog-splunk-6-3-event-collector-sink/</loc>
+    <loc>http://www.example.com/2014/09/03/serilog-splunk-6-3-event-collector-sink/</loc>
     <lastmod>2014-09-03T09:43:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/2014/08/27/2014/08/27/back-in-the-groove/</loc>
+    <loc>http://www.example.com/2014/08/27/2014/08/27/back-in-the-groove/</loc>
     <lastmod>2014-08-27T11:26:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/about/</loc>
+    <loc>http://www.example.com/about/</loc>
     <lastmod>2014-08-27T00:00:00+10:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/projects/</loc>
+    <loc>http://www.example.com/projects/</loc>
     <lastmod>2014-08-27T00:00:00+10:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/speaking/</loc>
+    <loc>http://www.example.com/speaking/</loc>
     <lastmod>2014-08-27T00:00:00+10:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/</loc>
+    <loc>http://www.example.com/</loc>
     <lastmod>2017-04-18T06:19:52+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/activedirectory/</loc>
+    <loc>http://www.example.com/tags/activedirectory/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/ad/</loc>
+    <loc>http://www.example.com/tags/ad/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/azure/</loc>
+    <loc>http://www.example.com/authors/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/azure/</loc>
     <lastmod>2017-04-18T06:19:52+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/categories/azure/</loc>
-    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/beginner/</loc>
+    <loc>http://www.example.com/tags/beginner/</loc>
     <lastmod>2014-08-27T11:26:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/bouldering/</loc>
+    <loc>http://www.example.com/tags/bouldering/</loc>
     <lastmod>2014-11-07T23:09:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/categories/</loc>
-    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
+    <loc>http://www.example.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/cli/</loc>
+    <loc>http://www.example.com/tags/cli/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/climbing/</loc>
+    <loc>http://www.example.com/tags/climbing/</loc>
     <lastmod>2014-11-07T23:09:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/devops/</loc>
+    <loc>http://www.example.com/categories/devops/</loc>
+    <lastmod>2015-06-25T10:19:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/devops/</loc>
     <lastmod>2017-04-18T06:19:52+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/categories/devops/</loc>
-    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/dotnet/</loc>
+    <loc>http://www.example.com/categories/dotnet/</loc>
     <lastmod>2016-06-02T23:34:35+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/categories/dotnet/</loc>
+    <loc>http://www.example.com/tags/dotnet/</loc>
     <lastmod>2016-06-02T23:34:35+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/github/</loc>
+    <loc>http://www.example.com/tags/github/</loc>
     <lastmod>2016-11-24T21:33:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/octopusdeploy/</loc>
-    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/categories/octopusdeploy/</loc>
-    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/opensource/</loc>
-    <lastmod>2016-11-24T21:33:45+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/oss/</loc>
-    <lastmod>2016-11-24T21:33:45+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/posts/</loc>
-    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/powershell/</loc>
-    <lastmod>2016-10-27T10:55:27+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/serilog/</loc>
-    <lastmod>2016-07-06T23:35:31+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/categories/serilog/</loc>
-    <lastmod>2016-07-06T23:35:31+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/splunk/</loc>
-    <lastmod>2016-11-24T21:33:45+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/categories/splunk/</loc>
+    <loc>http://www.example.com/categories/octopusdeploy/</loc>
     <lastmod>2016-11-07T09:53:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/</loc>
+    <loc>http://www.example.com/tags/octopusdeploy/</loc>
+    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/opensource/</loc>
+    <lastmod>2016-11-24T21:33:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/oss/</loc>
+    <lastmod>2016-11-24T21:33:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/posts/</loc>
+    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/powershell/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/webapp/</loc>
+    <loc>http://www.example.com/categories/serilog/</loc>
+    <lastmod>2016-07-06T23:35:31+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/serilog/</loc>
+    <lastmod>2016-07-06T23:35:31+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/categories/splunk/</loc>
+    <lastmod>2016-11-07T09:53:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/splunk/</loc>
+    <lastmod>2016-11-24T21:33:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/</loc>
+    <lastmod>2016-10-27T10:55:27+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.example.com/tags/webapp/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
     <priority>0</priority>
   </url>

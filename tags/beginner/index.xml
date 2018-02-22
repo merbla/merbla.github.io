@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Beginner on Get Amongst It!!</title>
-    <link>https://merbla.com/tags/beginner/</link>
-    <description>Recent content in Beginner on Get Amongst It!!</description>
+    <title>Beginner on Get Amongst It!</title>
+    <link>http://www.example.com/tags/beginner/</link>
+    <description>Recent content in Beginner on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
     <lastBuildDate>Wed, 27 Aug 2014 11:26:00 +0000</lastBuildDate>
     
-	<atom:link href="https://merbla.com/tags/beginner/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.example.com/tags/beginner/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Back in the saddle</title>
-      <link>https://merbla.com/2014/08/27/2014/08/27/back-in-the-groove/</link>
+      <link>http://www.example.com/2014/08/27/2014/08/27/back-in-the-groove/</link>
       <pubDate>Wed, 27 Aug 2014 11:26:00 +0000</pubDate>
       
-      <guid>https://merbla.com/2014/08/27/2014/08/27/back-in-the-groove/</guid>
+      <guid>http://www.example.com/2014/08/27/2014/08/27/back-in-the-groove/</guid>
       <description>It has been a long time since I have been blogging. To be honest, I was off doing other things. Now I am back, ready to share my mistakes with the world in a verbose format.
 Here is hoping that I learn something new along the way.</description>
     </item>

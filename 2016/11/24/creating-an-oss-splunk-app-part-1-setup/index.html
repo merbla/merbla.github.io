@@ -1,74 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<meta name="author" content="Matthew Erbs">
-		<meta name="description" content="Get Amongst It!!">
-		<meta name="generator" content="Hugo 0.36" />
-		<title>Creating an OSS Splunk App Part 1: Setting up &middot; Get Amongst It!!</title>
-		<link rel="shortcut icon" href="https://merbla.com/images/favicon.ico">
-		<link rel="stylesheet" href="https://merbla.com/css/style.css">
-		<link rel="stylesheet" href="https://merbla.com/css/highlight.css">
+<html lang='en'>
 
-		
-		<link rel="stylesheet" href="https://merbla.com/css/font-awesome.min.css">
-		
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='It&#39;s the little things...'>
 
-		
-		<link href="https://merbla.com/index.xml" rel="alternate" type="application/rss+xml" title="Get Amongst It!!" />
-		
+<meta property='og:title' content='Creating an OSS Splunk App Part 1: Setting up • Get Amongst It!'>
+<meta property='og:description' content='It&#39;s the little things...'>
+<meta property='og:url' content='http://www.example.com/2016/11/24/creating-an-oss-splunk-app-part-1-setup/'>
+<meta property='og:site_name' content='Get Amongst It!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='octopusdeploy'><meta property='article:tag' content='Splunk'><meta property='article:tag' content='github'><meta property='article:tag' content='opensource'><meta property='article:tag' content='oss'><meta property='article:published_time' content='2016-11-24T21:33:45Z'/><meta property='article:modified_time' content='2016-11-24T21:33:45Z'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
 
-		
-	</head>
+<meta name="generator" content="Hugo 0.36" />
 
-    <body>
-       <nav class="main-nav">
-	
-	
-		<a href='https://merbla.com/'> <span class="arrow">←</span>Home</a>
-	
-	
-	<a href='https://merbla.com/posts/'>Archive</a>
-	<a href='https://merbla.com/tags/'>Tags</a>
-	<a href='https://merbla.com/speaking/'>Speaking</a>
-	<a href='https://merbla.com/about/'>About</a>	
+  <title>Creating an OSS Splunk App Part 1: Setting up • Get Amongst It!</title>
+  <link rel='canonical' href='http://www.example.com/2016/11/24/creating-an-oss-splunk-app-part-1-setup/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.9efb8af6.css'><link rel='stylesheet' href='/assets/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-54363470-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
 
-	
-
-	
+</head>
 
 
+<body class='page type-posts has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    Get Amongst It!
+    </h2>
+    <div class='desc'>
+    Matthew&#39;s Musings
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/serilog' style='font-size:1.5em'>Serilog</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:2em'>Splunk</a>
+      </li><li>
+        <a href='/tags/activedirectory' style='font-size:1em'>Activedirectory</a>
+      </li><li>
+        <a href='/tags/ad' style='font-size:1em'>Ad</a>
+      </li><li>
+        <a href='/tags/azure' style='font-size:1.3333333333333333em'>Azure</a>
+      </li><li>
+        <a href='/tags/beginner' style='font-size:1em'>Beginner</a>
+      </li><li>
+        <a href='/tags/bouldering' style='font-size:1em'>Bouldering</a>
+      </li><li>
+        <a href='/tags/cli' style='font-size:1em'>Cli</a>
+      </li><li>
+        <a href='/tags/climbing' style='font-size:1em'>Climbing</a>
+      </li><li>
+        <a href='/tags/devops' style='font-size:1.1666666666666667em'>Devops</a>
+      </li><li>
+        <a href='/tags/dotnet' style='font-size:1em'>Dotnet</a>
+      </li><li>
+        <a href='/tags/github' style='font-size:1em'>Github</a>
+      </li><li>
+        <a href='/tags/octopusdeploy' style='font-size:1.6666666666666665em'>Octopusdeploy</a>
+      </li><li>
+        <a href='/tags/opensource' style='font-size:1em'>Opensource</a>
+      </li><li>
+        <a href='/tags/oss' style='font-size:1em'>Oss</a>
+      </li><li>
+        <a href='/tags/powershell' style='font-size:1.1666666666666667em'>Powershell</a>
+      </li><li>
+        <a href='/tags/webapp' style='font-size:1em'>Webapp</a>
+      </li></ul>
+</div>
 
 
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='/about'>About</a>
+      </li><li class='item'>
+        <a href='/speaking'>Speaking</a>
+      </li></ul>
+  </div>
 </nav>
 
 
-        <section id="wrapper" class="post">
-            <article>
-                <header>
-                    <h1>
-                        Creating an OSS Splunk App Part 1: Setting up
-                    </h1>
-                    <h2 class="headline">
-                    Nov 24, 2016 21:33
-                    · 822 words
-                    · 4 minute read
-                    <p></p>
-         
-                    </h2>
-                </header>
-                
-                <section id="post-body">
-                    
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+ 
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Creating an OSS Splunk App Part 1: Setting up</h1>
+      
+<p class='desc'>It&#39;s the little things...</p>
+
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2016-11-24T21:33:45Z'>2016, Nov 24</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+4 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
 
 <p><img src="/images/2016/11/welcometocat.png" alt="" /></p>
 
-<p><em>Octocat by <a href="https://github.com/jglovier">jglovier</a> &amp; <a href="https://github.com/JohnCreek">JohnCreek</a></em></p>
+<p><em>Octocat by <a href="https://github.com/jglovier" target="_blank">jglovier</a> &amp; <a href="https://github.com/JohnCreek" target="_blank">JohnCreek</a></em></p>
 
-<p>This is the next instalment of series of posts related to building your our Open Source app for [Splunk]().  My initial thoughts are over <a href="https://blog.merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/">here</a>, and I hope to structure the series as follows:</p>
+<p>This is the next instalment of series of posts related to building your our Open Source app for [Splunk]().  My initial thoughts are over <a href="https://blog.merbla.com/2016/11/07/redux-octopus-deploy-splunk-app/" target="_blank">here</a>, and I hope to structure the series as follows:</p>
 
 <ul>
 <li>[Part 1 - Setting up a repository and build on Github for a Splunk app]().</li>
@@ -83,7 +240,7 @@
 
 <p>Many people would probably start hacking away at this point, however I thought I would take a step back and tackle this from a quality point of view.  The idea is to first create a deployable artefact with the bare minimum content, prior to crunching out any code.</p>
 
-<p>Overall the goal of this blog series is to produce a high quality app that can be submitted to <a href="https://splunkbase.splunk.com/">Splunkbase</a> for the wider public to use.</p>
+<p>Overall the goal of this blog series is to produce a high quality app that can be submitted to <a href="https://splunkbase.splunk.com/" target="_blank">Splunkbase</a> for the wider public to use.</p>
 
 <h2 id="tools-languages">Tools &amp; Languages</h2>
 
@@ -91,85 +248,73 @@
 
 <h2 id="code-repository">Code Repository</h2>
 
-<p>I chose the defacto for Open Source hosting&hellip; GitHub.  A new repository exists for the <a href="https://github.com/merbla/splunk-octopusdeploy-add-on">Add On</a> and the <a href="https://github.com/merbla/splunk-octopusdeploy">existing</a> repository will be used for an updated dashboard app.  Once you create a new repository will also want to establish a <a href="https://help.github.com/articles/adding-a-license-to-a-repository/">licence</a>, <a href="https://help.github.com/articles/helping-people-contribute-to-your-project/">contribution guidelines</a> along with other <a href="https://help.github.com/articles/adding-a-license-to-a-repository/">bits and pieces</a>.  Also don&rsquo;t forget a <a href="https://github.com/merbla/splunk-octopusdeploy-add-on/blob/master/.gitignore">.gitignore</a> file.</p>
+<p>I chose the defacto for Open Source hosting&hellip; GitHub.  A new repository exists for the <a href="https://github.com/merbla/splunk-octopusdeploy-add-on" target="_blank">Add On</a> and the <a href="https://github.com/merbla/splunk-octopusdeploy" target="_blank">existing</a> repository will be used for an updated dashboard app.  Once you create a new repository will also want to establish a <a href="https://help.github.com/articles/adding-a-license-to-a-repository/" target="_blank">licence</a>, <a href="https://help.github.com/articles/helping-people-contribute-to-your-project/" target="_blank">contribution guidelines</a> along with other <a href="https://help.github.com/articles/adding-a-license-to-a-repository/" target="_blank">bits and pieces</a>.  Also don&rsquo;t forget a <a href="https://github.com/merbla/splunk-octopusdeploy-add-on/blob/master/.gitignore" target="_blank">.gitignore</a> file.</p>
 
 <p>I structured the folders in the following layout in attempt to keep the code clean from the build and documentation files.</p>
-
-<pre><code class="language-bash">├── .gitignore
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── .gitignore
 ├── docs
 ├── src
 │   ├── bin
 │   ├── default
 │   └── static
-└── test
-</code></pre>
-
+└── test</code></pre></div>
 <h2 id="doco">Doco</h2>
 
-<p>For the documentation, I opted for <a href="https://readthedocs.org/">Read The Docs</a>,  I wanted to establish a documentation output early in the process that was easy to maintain.  In this case I went with <a href="https://en.wikipedia.org/wiki/ReStructuredText">ReStructuredText</a> that can also be generated locally with a Make file.  More details on how to setup ReadTheDocs can be found over <a href="https://docs.readthedocs.io/en/latest/getting_started.html">here</a>.</p>
+<p>For the documentation, I opted for <a href="https://readthedocs.org/" target="_blank">Read The Docs</a>,  I wanted to establish a documentation output early in the process that was easy to maintain.  In this case I went with <a href="https://en.wikipedia.org/wiki/ReStructuredText" target="_blank">ReStructuredText</a> that can also be generated locally with a Make file.  More details on how to setup ReadTheDocs can be found over <a href="https://docs.readthedocs.io/en/latest/getting_started.html" target="_blank">here</a>.</p>
 
-<p>The documentation produced can be found at <a href="http://splunk-octopusdeploy-add-on.readthedocs.io/en/latest/">http://splunk-octopusdeploy-add-on.readthedocs.io/en/latest/</a>.</p>
+<p>The documentation produced can be found at <a href="http://splunk-octopusdeploy-add-on.readthedocs.io/en/latest/" target="_blank">http://splunk-octopusdeploy-add-on.readthedocs.io/en/latest/</a>.</p>
 
 <h2 id="the-build">The Build</h2>
 
-<p>The next item on the list is the build.  For this I have utilised <a href="https://travis-ci.org/">TravisCI</a>.  The first step I took however was to create a build file that allowed me to package the app locally and test the process.  The current build script can be viewed <a href="https://github.com/merbla/splunk-octopusdeploy-add-on/blob/master/build.sh">here</a>.</p>
+<p>The next item on the list is the build.  For this I have utilised <a href="https://travis-ci.org/" target="_blank">TravisCI</a>.  The first step I took however was to create a build file that allowed me to package the app locally and test the process.  The current build script can be viewed <a href="https://github.com/merbla/splunk-octopusdeploy-add-on/blob/master/build.sh" target="_blank">here</a>.</p>
 
 <p>In this file I attempt to do the following:</p>
 
 <ul>
-<li>Establish a release version resembling <a href="http://semver.org/">SemVer</a>.</li>
+<li>Establish a release version resembling <a href="http://semver.org/" target="_blank">SemVer</a>.</li>
 <li>Create a clean temp workspace.</li>
 <li>Copy any required files for the app package.</li>
 <li>Remove any unwanted files (in this case python cache).</li>
-<li>Bump the version using <a href="https://github.com/peritus/bumpversion">bumpversion</a>.</li>
+<li>Bump the version using <a href="https://github.com/peritus/bumpversion" target="_blank">bumpversion</a>.</li>
 <li>Package the file as a tgz.</li>
-<li>Run <a href="http://doc.pytest.org/en/latest/">pytest</a> for any Unit tests in place.</li>
-<li>Run <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U">Splunk AppInspect</a> to ensure quality.</li>
+<li>Run <a href="http://doc.pytest.org/en/latest/" target="_blank">pytest</a> for any Unit tests in place.</li>
+<li>Run <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U" target="_blank">Splunk AppInspect</a> to ensure quality.</li>
 </ul>
 
-<p>Next I needed to establish a <a href="https://travis-ci.org">TravisCI</a> build.  After connecting your account  to <a href="https://travis-ci.org">TravisCI</a> (I use a build account in GitHub) you then create a <a href="https://github.com/merbla/splunk-octopusdeploy-add-on/blob/master/.travis.yml">.travis.yml</a> in the root of the GitHub repo.</p>
+<p>Next I needed to establish a <a href="https://travis-ci.org" target="_blank">TravisCI</a> build.  After connecting your account  to <a href="https://travis-ci.org" target="_blank">TravisCI</a> (I use a build account in GitHub) you then create a <a href="https://github.com/merbla/splunk-octopusdeploy-add-on/blob/master/.travis.yml" target="_blank">.travis.yml</a> in the root of the GitHub repo.</p>
 
 <p>In TravisCI I am going to treat this as a Python app, so I start with the following block.</p>
-
-<pre><code class="language-yaml">language: python
-sudo: false
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language: python
+sudo: <span style="color:#66d9ef">false</span>
 python:
-  - '2.7'
-</code></pre>
-
-<p>Then I need some requirements such as <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U">Splunk AppInspect</a> and
-<a href="https://github.com/peritus/bumpversion">bumpversion</a>, so I add some <code>before_script</code> steps.</p>
-
-<pre><code class="language-yaml">before_install:
+  - <span style="color:#e6db74">&#39;2.7&#39;</span></code></pre></div>
+<p>Then I need some requirements such as <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U" target="_blank">Splunk AppInspect</a> and
+<a href="https://github.com/peritus/bumpversion" target="_blank">bumpversion</a>, so I add some <code>before_script</code> steps.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">before_install:
   - wget --output-document splunk-appinspect.tar.gz http://dev.splunk.com/goto/appinspectdownload
   - pip install splunk-appinspect.tar.gz
 install:
   - pip install bumpversion
-  - pip install -r src/requirements.txt
-</code></pre>
-
-<p>The next set of commands relate to the build itself and the releases.  In this case, <a href="https://help.github.com/articles/creating-releases/">releasing</a> to GitHub on a tagged commit.</p>
-
-<pre><code class="language-yaml">script:
-  - &quot;./build.sh&quot;
+  - pip install -r src/requirements.txt</code></pre></div>
+<p>The next set of commands relate to the build itself and the releases.  In this case, <a href="https://help.github.com/articles/creating-releases/" target="_blank">releasing</a> to GitHub on a tagged commit.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">script:
+  - <span style="color:#e6db74">&#34;./build.sh&#34;</span>
 deploy:
   provider: releases
-  skip_cleanup: true
+  skip_cleanup: <span style="color:#66d9ef">true</span>
   on:
-    tags: true
-</code></pre>
+    tags: <span style="color:#66d9ef">true</span></code></pre></div>
+<p>The complete file is [here]() and TravisCI docs with more detailed configuration can be found at their <a href="https://docs.travis-ci.com/" target="_blank">docs site</a>.</p>
 
-<p>The complete file is [here]() and TravisCI docs with more detailed configuration can be found at their <a href="https://docs.travis-ci.com/">docs site</a>.</p>
-
-<p>Finally the build is at <a href="https://travis-ci.org/merbla/splunk-octopusdeploy-add-on">https://travis-ci.org/merbla/splunk-octopusdeploy-add-on</a> with badges and other integrations possible.</p>
+<p>Finally the build is at <a href="https://travis-ci.org/merbla/splunk-octopusdeploy-add-on" target="_blank">https://travis-ci.org/merbla/splunk-octopusdeploy-add-on</a> with badges and other integrations possible.</p>
 
 <h3 id="you-broke-the-build">You Broke the build!</h3>
 
 <p><img src="/images/2016/11/small_failed_build.png" alt="50%" /></p>
 
-<p>That&rsquo;s right, at the time of writing I wanted to have the build broken as a segue into the next post.  I also wanted to illustrate how <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U">Splunk AppInspect</a> can be used in the build pipeline.</p>
+<p>That&rsquo;s right, at the time of writing I wanted to have the build broken as a segue into the next post.  I also wanted to illustrate how <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U" target="_blank">Splunk AppInspect</a> can be used in the build pipeline.</p>
 
-<p>If you have a look at <a href="https://travis-ci.org/merbla/splunk-octopusdeploy-add-on/builds/178259548">Build 15</a> you will see the output of the current build process.  At the bottom of the build output is the <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U">Splunk AppInspect</a> result.  This is key to getting a high quality app ready for a Splunk deployment.</p>
+<p>If you have a look at <a href="https://travis-ci.org/merbla/splunk-octopusdeploy-add-on/builds/178259548" target="_blank">Build 15</a> you will see the output of the current build process.  At the bottom of the build output is the <a href="http://dev.splunk.com/view/appinspect/SP-CAAAE9U" target="_blank">Splunk AppInspect</a> result.  This is key to getting a high quality app ready for a Splunk deployment.</p>
 
 <pre><code>octpopus_deploy_addon Report Summary:
 
@@ -193,114 +338,140 @@ not_applicable: 92
 <h2 id="some-links">Some Links</h2>
 
 <ul>
-<li><a href="https://github.com/merbla/splunk-octopusdeploy-add-on">GitHub Repository - Octopus Deploy Add On</a></li>
-<li><a href="https://github.com/merbla/splunk-octopusdeploy-add-on">GitHub Repository - Existing Dashboard app</a></li>
-<li><a href="http://splunk-octopusdeploy-add-on.readthedocs.io/en/latest/">Read The Docs - Octopus Deploy Add On</a></li>
-<li><a href="https://travis-ci.org/merbla/splunk-octopusdeploy-add-on">TravisCI - Octopus Deploy Add On</a></li>
+<li><a href="https://github.com/merbla/splunk-octopusdeploy-add-on" target="_blank">GitHub Repository - Octopus Deploy Add On</a></li>
+<li><a href="https://github.com/merbla/splunk-octopusdeploy-add-on" target="_blank">GitHub Repository - Existing Dashboard app</a></li>
+<li><a href="http://splunk-octopusdeploy-add-on.readthedocs.io/en/latest/" target="_blank">Read The Docs - Octopus Deploy Add On</a></li>
+<li><a href="https://travis-ci.org/merbla/splunk-octopusdeploy-add-on" target="_blank">TravisCI - Octopus Deploy Add On</a></li>
 </ul>
 
 <h3 id="get-amongst-it">Get Amongst It!!</h3>
 
-                </section>
-            </article>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/octopusdeploy'>Octopusdeploy</a>, <a class='tag' href='/tags/splunk'>Splunk</a>, <a class='tag' href='/tags/github'>Github</a>, <a class='tag' href='/tags/opensource'>Opensource</a>, <a class='tag' href='/tags/oss'>Oss</a></div>
+
+  </div>
+</footer>
 
 
-              <span class="tags">
-                tags:
-                      
-                      
-                          
-                              <a href="https://merbla.com/tags/octopusdeploy">octopusdeploy</a>
-                          
-                              <a href="https://merbla.com/tags/splunk">Splunk</a>
-                          
-                              <a href="https://merbla.com/tags/github">github</a>
-                          
-                              <a href="https://merbla.com/tags/opensource">opensource</a>
-                          
-                              <a href="https://merbla.com/tags/oss">oss</a>
-                          
-                      
-                      
-              </span>
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/2016/11/07/redux-octopus-deploy-splunk-app/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Redux - Octopus Deploy Splunk App</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/'>
+        <span class='screen-reader-text'>Next post: </span>Setting up Octopus Deploy with a Service Principal - Azure CLI<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
 
 
-            
-            <p></p>
-             <span class="tags">
-              <a class="cta" href="https://merbla.com/index.xml">Subscribe</a>
-               </span>
-            
-
-        
-            
-
-            
-                <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'merbla-com'; 
-
-     
+<section class='comments'>
+  <div class='container sep-before'>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "merbla-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2018 Matthew Erbs </p>
 </div>
 
-            
+        </div>
+      </footer>
 
-            
+    </div>
+  </div><div class='sidebar-overlay'></div><script src='/assets/js/main.89545a27.js'></script></body>
 
-            <footer id="footer">
-    
-        <div id="social">
-
-	
-	
-    <a class="symbol" href="https://www.github.com/merbla">
-        <i class="fa fa-github-square"></i>
-    </a>
-    
-    <a class="symbol" href="https://www.instagram.com/matthewerbs/">
-        <i class="fa fa-instagram"></i>
-    </a>
-    
-    <a class="symbol" href="https://www.twitter.com/matthewerbs">
-        <i class="fa fa-twitter-square"></i>
-    </a>
-    
-
-
-</div>
-
-    
-    <p class="small">
-    
-       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> Matthew Erbs
-    
-    </p>
-    <p class="small">
-        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
-    </p>
-
-    
-</footer>
-
-        </section>
-
-        <script src="https://merbla.com/js/jquery-3.3.1.min.js"></script>
-<script src="https://merbla.com/js/main.js"></script>
-<script src="https://merbla.com/js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-
-    </body>
 </html>
+
