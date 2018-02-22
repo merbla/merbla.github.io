@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Devops on Get Amongst It!</title>
-    <link>http://www.example.com/categories/devops/</link>
+    <link>https://merbla.com/categories/devops/</link>
     <description>Recent content in Devops on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 25 Jun 2015 10:19:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.example.com/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://merbla.com/categories/devops/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Introducing the Splunk Add-On for Octopus Deploy</title>
-      <link>http://www.example.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</link>
+      <link>https://merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</link>
       <pubDate>Thu, 25 Jun 2015 10:19:00 +0000</pubDate>
       
-      <guid>http://www.example.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</guid>
+      <guid>https://merbla.com/2015/06/25/introducing-the-splunk-add-on-for-octopus-deploy/</guid>
       <description>It&amp;rsquo;s no secret to those who know me well, I enjoy the delight of a seamless deployment. The team over at Octopus Deploy have toiled for a number of years developing a tool and educating the wider .Net community about the benefits of a repeatable deployment.
 Another aspect of tech I love, is structured logging. In particular the detailed visibility it provides into our solutions and what they are really up to.</description>
     </item>

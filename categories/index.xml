@@ -2,55 +2,55 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Get Amongst It!</title>
-    <link>http://www.example.com/categories/</link>
+    <link>https://merbla.com/categories/</link>
     <description>Recent content in Categories on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	<atom:link href="http://www.example.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://merbla.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Devops</title>
-      <link>http://www.example.com/categories/devops/</link>
+      <link>https://merbla.com/categories/devops/</link>
       <pubDate>Thu, 25 Jun 2015 10:19:00 +0000</pubDate>
       
-      <guid>http://www.example.com/categories/devops/</guid>
+      <guid>https://merbla.com/categories/devops/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dotnet</title>
-      <link>http://www.example.com/categories/dotnet/</link>
+      <link>https://merbla.com/categories/dotnet/</link>
       <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
       
-      <guid>http://www.example.com/categories/dotnet/</guid>
+      <guid>https://merbla.com/categories/dotnet/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Octopusdeploy</title>
-      <link>http://www.example.com/categories/octopusdeploy/</link>
+      <link>https://merbla.com/categories/octopusdeploy/</link>
       <pubDate>Mon, 07 Nov 2016 09:53:00 +0000</pubDate>
       
-      <guid>http://www.example.com/categories/octopusdeploy/</guid>
+      <guid>https://merbla.com/categories/octopusdeploy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Serilog</title>
-      <link>http://www.example.com/categories/serilog/</link>
+      <link>https://merbla.com/categories/serilog/</link>
       <pubDate>Wed, 06 Jul 2016 23:35:31 +0000</pubDate>
       
-      <guid>http://www.example.com/categories/serilog/</guid>
+      <guid>https://merbla.com/categories/serilog/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Splunk</title>
-      <link>http://www.example.com/categories/splunk/</link>
+      <link>https://merbla.com/categories/splunk/</link>
       <pubDate>Mon, 07 Nov 2016 09:53:00 +0000</pubDate>
       
-      <guid>http://www.example.com/categories/splunk/</guid>
+      <guid>https://merbla.com/categories/splunk/</guid>
       <description></description>
     </item>
     

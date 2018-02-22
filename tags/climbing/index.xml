@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Climbing on Get Amongst It!</title>
-    <link>http://www.example.com/tags/climbing/</link>
+    <link>https://merbla.com/tags/climbing/</link>
     <description>Recent content in Climbing on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 07 Nov 2014 23:09:00 +0000</lastBuildDate>
     
-	<atom:link href="http://www.example.com/tags/climbing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://merbla.com/tags/climbing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Building a bouldering wall</title>
-      <link>http://www.example.com/2014/11/07/building-a-bouldering-wall/</link>
+      <link>https://merbla.com/2014/11/07/building-a-bouldering-wall/</link>
       <pubDate>Fri, 07 Nov 2014 23:09:00 +0000</pubDate>
       
-      <guid>http://www.example.com/2014/11/07/building-a-bouldering-wall/</guid>
+      <guid>https://merbla.com/2014/11/07/building-a-bouldering-wall/</guid>
       <description>In the last twelve months or so my son has taken an interest in climbing, in particular bouldering. Given his burgeoning desire to climb, I thought I would build a wall under our house. We have a post-war Queensland house typical in suburbs in and around Brisbane.
 So, how was a guy with no construction experience going to achive this task? Well below is a quick wrap of what I got up to.</description>
     </item>
