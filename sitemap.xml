@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://merbla.com/2018/04/04/exploring-serilog-v2---the-console-sink/</loc>
+    <lastmod>2018-04-04T00:00:00+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://merbla.com/2018/04/02/exploring-serilog-v2---lets-go/</loc>
     <lastmod>2018-04-02T17:19:02+10:00</lastmod>
   </url>
@@ -94,7 +99,7 @@
   
   <url>
     <loc>https://merbla.com/</loc>
-    <lastmod>2018-04-02T17:19:02+10:00</lastmod>
+    <lastmod>2018-04-04T00:00:00+10:00</lastmod>
   </url>
   
   <url>
@@ -175,13 +180,13 @@
   
   <url>
     <loc>https://merbla.com/categories/exploring-serilog-v2/</loc>
-    <lastmod>2018-04-02T17:19:02+10:00</lastmod>
+    <lastmod>2018-04-04T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://merbla.com/tags/exploring-serilog-v2/</loc>
-    <lastmod>2018-04-02T17:19:02+10:00</lastmod>
+    <lastmod>2018-04-04T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -217,7 +222,7 @@
   
   <url>
     <loc>https://merbla.com/posts/</loc>
-    <lastmod>2018-04-02T17:19:02+10:00</lastmod>
+    <lastmod>2018-04-04T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
