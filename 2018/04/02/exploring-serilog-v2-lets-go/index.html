@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Serilog has been around for some time and since then the ecosystem has grown and been developed behind a fantasic community and the leadership of Nick. I have been lucky enough to be involved for some time as a co-owner of Serilog however I still find myself forgetting key areas of the platform.
+As as a result, I thought I start a series of posts addressing areas that are commonly asked about either in our Gitter Channel, on GitHub or elsewhere.'>
+
+<meta property='og:title' content='Exploring Serilog v2 - Lets Go! • Get Amongst It!'>
+<meta property='og:description' content='Serilog has been around for some time and since then the ecosystem has grown and been developed behind a fantasic community and the leadership of Nick. I have been lucky enough to be involved for some time as a co-owner of Serilog however I still find myself forgetting key areas of the platform.
+As as a result, I thought I start a series of posts addressing areas that are commonly asked about either in our Gitter Channel, on GitHub or elsewhere.'>
+<meta property='og:url' content='https://merbla.com/2018/04/02/exploring-serilog-v2-lets-go/'>
+<meta property='og:site_name' content='Get Amongst It!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='serilog'><meta property='article:published_time' content='2018-04-02T17:19:02&#43;10:00'/><meta property='article:modified_time' content='2018-04-02T17:19:02&#43;10:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
+
+<meta name="generator" content="Hugo 0.36" />
+
+  <title>Exploring Serilog v2 - Lets Go! • Get Amongst It!</title>
+  <link rel='canonical' href='https://merbla.com/2018/04/02/exploring-serilog-v2-lets-go/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.9efb8af6.css'><link rel='stylesheet' href='/assets/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-54363470-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    Get Amongst It!
+    </h2>
+    <div class='desc'>
+    Matthew&#39;s Musings
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/serilog' style='font-size:1.5em'>Serilog</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:2em'>Splunk</a>
+      </li><li>
+        <a href='/tags/activedirectory' style='font-size:1em'>Activedirectory</a>
+      </li><li>
+        <a href='/tags/ad' style='font-size:1em'>Ad</a>
+      </li><li>
+        <a href='/tags/azure' style='font-size:1.3333333333333333em'>Azure</a>
+      </li><li>
+        <a href='/tags/beginner' style='font-size:1em'>Beginner</a>
+      </li><li>
+        <a href='/tags/bouldering' style='font-size:1em'>Bouldering</a>
+      </li><li>
+        <a href='/tags/cli' style='font-size:1em'>Cli</a>
+      </li><li>
+        <a href='/tags/climbing' style='font-size:1em'>Climbing</a>
+      </li><li>
+        <a href='/tags/devops' style='font-size:1.1666666666666667em'>Devops</a>
+      </li><li>
+        <a href='/tags/dotnet' style='font-size:1em'>Dotnet</a>
+      </li><li>
+        <a href='/tags/github' style='font-size:1em'>Github</a>
+      </li><li>
+        <a href='/tags/octopusdeploy' style='font-size:1.6666666666666665em'>Octopusdeploy</a>
+      </li><li>
+        <a href='/tags/opensource' style='font-size:1em'>Opensource</a>
+      </li><li>
+        <a href='/tags/oss' style='font-size:1em'>Oss</a>
+      </li><li>
+        <a href='/tags/powershell' style='font-size:1.1666666666666667em'>Powershell</a>
+      </li><li>
+        <a href='/tags/serilog' style='font-size:1.1666666666666667em'>Serilog</a>
+      </li><li>
+        <a href='/tags/webapp' style='font-size:1em'>Webapp</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='https://merbla.com/posts/'>Posts</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/speaking/'>Speaking</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/about/'>About</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+ 
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Exploring Serilog v2 - Lets Go!</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2018-04-02T17:19:02&#43;10:00'>2018, Apr 02</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+4 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p><a href="https://serilog.net/" target="_blank">Serilog</a> has been around for some <a href="https://www.nuget.org/packages/Serilog/0.1.6" target="_blank">time</a> and since then the ecosystem has grown and been developed behind a fantasic community and the leadership of <a href="https://twitter.com/nblumhardt" target="_blank">Nick</a>.  I have been lucky enough to be involved for some time as a co-owner of <a href="https://serilog.net/" target="_blank">Serilog</a> however I still find myself forgetting key areas of the platform.</p>
+
+<p>As as a result, I thought I start a series of posts addressing areas that are commonly asked about either in our <a href="https://gitter.im/serilog/serilog" target="_blank">Gitter Channel</a>, on <a href="https://github.com/serilog/serilog/issues" target="_blank">GitHub</a> or elsewhere.</p>
+
+<p>First up&hellip; a quick example.  I am primarily using a Mac these days so here is how to get running with VSCode &amp; .Net Core.</p>
+
+<ul>
+<li>Create a console app
+
+<ul>
+<li><code>dotnet new console -n example-console</code></li>
+<li><code>cd example-console</code></li>
+</ul></li>
+<li>Add the sink package
+
+<ul>
+<li><code>dotnet add package Serilog.Sinks.Console</code></li>
+</ul></li>
+<li>Open VSCode
+
+<ul>
+<li><code>code .</code></li>
+</ul></li>
+</ul>
+
+<p>You will have something like the stub below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System;
+
+<span style="color:#66d9ef">namespace</span> example_console
+{
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    {
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args)
+        {
+            <span style="color:#a6e22e">Console</span>.WriteLine(<span style="color:#e6db74">&#34;Hello World!&#34;</span>);
+        }
+    }
+}</code></pre></div>
+<p>Add a using statement e.g. <code>using Serilog;</code>.  One of the great features of Serilog is the fluent interface, in particular how via convention, sinks and other helpers are included in the root namespace making methods easily accesible.</p>
+
+<p>Let start by setting up the static logger, while in the code, remove the stubbed <code>Console.WriteLine</code> above.</p>
+
+<p>Rembember! <em>Friends don&rsquo;t let friends write to Console.Writeline&hellip;</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+            .CreateLogger();</code></pre></div>
+<p>In Serilog the following logging levels exist, in order from most verbose to fatal.  A quick description can be found over on the <a href="https://github.com/serilog/serilog/wiki/Configuration-Basics#minimum-level" target="_blank">wiki</a>.</p>
+
+<ul>
+<li>Verbose</li>
+<li>Debug</li>
+<li>Information</li>
+<li>Warning</li>
+<li>Error</li>
+<li>Fatal</li>
+</ul>
+
+<p>Now let&rsquo;s add a few log statements.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Verbose(<span style="color:#e6db74">&#34;This is a debug statement&#34;</span>);
+<span style="color:#a6e22e">Log</span>.Debug(<span style="color:#e6db74">&#34;This is a debug statement&#34;</span>);
+<span style="color:#a6e22e">Log</span>.Information(<span style="color:#e6db74">&#34;This is a info statement&#34;</span>);
+<span style="color:#a6e22e">Log</span>.Warning(<span style="color:#e6db74">&#34;This is a warning statement&#34;</span>);
+<span style="color:#a6e22e">Log</span>.Error(<span style="color:#e6db74">&#34;This is an error statement&#34;</span>);
+<span style="color:#a6e22e">Log</span>.Fatal(<span style="color:#e6db74">&#34;This is a fatal statement&#34;</span>);</code></pre></div>
+<p>If we run this project, there won&rsquo;t be any output. Why?</p>
+
+<p>Firstly, lets get a little background on the pipeline flow within Serilog itself.  Initially <code>Log.Logger</code> is in instantiated  with a <code>SilentLogger</code>, this is an internal logger that will efficently deal with events in the absence of any configuration.  In fact, you don&rsquo;t have to configure the <code>Log.Logger</code> as we have above to experience this behaviour.</p>
+
+<p>Let&rsquo;s add a sink, in other words, a destination for our events.</p>
+
+<p>Update the configuration to use the console sink.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+        .<span style="color:#a6e22e">WriteTo</span>.Console()
+        .CreateLogger();</code></pre></div>
+<p>If we run the app again, we get the following output.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">20</span>:17:33 INF<span style="color:#f92672">]</span> This is a info statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">20</span>:17:33 WRN<span style="color:#f92672">]</span> This is an warning statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">20</span>:17:33 ERR<span style="color:#f92672">]</span> This is a error statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">20</span>:17:33 FTL<span style="color:#f92672">]</span> This is a fatal statement</code></pre></div>
+<p>Wait&hellip; Where are the verbose and debug events?</p>
+
+<p>The reason the two initial events are missing, relates to the default configuration within Serilog.  A key area to understanding the Serilog pipeline is the method by which events are enabled for a given log level.  This applies to logging configuration, sinks and sub loggers.  By default Serilog will enable the minimum log level as <code>Information</code>.  This often seen overidden in examples using the <code>MinimumLevel</code> interface.</p>
+
+<p>So let&rsquo;s update the configuration to enable the <code>Verbose</code> level.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .....
+    .<span style="color:#a6e22e">MinimumLevel</span>.Verbose()
+    ....
+    .CreateLogger();</code></pre></div>
+<p>As you would expect the events now appear.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">16</span>:10:43 VRB<span style="color:#f92672">]</span> This is a verbose statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">16</span>:10:43 DBG<span style="color:#f92672">]</span> This is a debug statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">16</span>:10:43 INF<span style="color:#f92672">]</span> This is a info statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">16</span>:10:43 WRN<span style="color:#f92672">]</span> This is a warning statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">16</span>:10:43 ERR<span style="color:#f92672">]</span> This is an error statement
+<span style="color:#f92672">[</span><span style="color:#ae81ff">16</span>:10:43 FTL<span style="color:#f92672">]</span> This is a fatal statement</code></pre></div>
+<p>So what other options are available in the initial configuration?</p>
+
+<ul>
+<li><code>.AuditTo(...)</code>
+
+<ul>
+<li>An optional feature of Auditing events not generally used with async style sinks (HTTP destinations).</li>
+</ul></li>
+<li><code>.Destructure(...)</code>
+
+<ul>
+<li>The ability to destructure events via message templates.  A great explaination of message templates can be found over at <a href="https://messagetemplates.org/" target="_blank">https://messagetemplates.org/</a>.</li>
+</ul></li>
+<li><code>.Enrich(...)</code>
+
+<ul>
+<li>Used to add property data related to a specific event.  Enrichers will implement <code>ILogEventEnricher</code>.</li>
+</ul></li>
+<li><code>.Filter(...)</code>
+
+<ul>
+<li>A filter will implement <code>ILogEventFilter</code> in order to filter events based on log event data.</li>
+</ul></li>
+<li><code>.ReadFrom(...)</code>
+
+<ul>
+<li>A way of applying configuration to the log configuration, common examples include from configuration files.</li>
+</ul></li>
+<li><code>.WriteTo(...)</code>
+
+<ul>
+<li>The way sinks are wired into the pipeline, as per the console example above.  Sinks implement the <code>ILogEventSink</code> interface.</li>
+</ul></li>
+</ul>
+
+<p>On the surface, it does not appear that much can be achieved with such a small API.  In fact the <a href="https://twitter.com/MatthewErbs/status/961776534246776832" target="_blank">eco-system</a> built by the community shows quite the opposite with new sinks and extensions being added all the time.
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Some <a href="https://twitter.com/hashtag/Serilog?src=hash&amp;ref_src=twsrc%5Etfw">#Serilog</a> stats for your Friday arvo… <a href="https://t.co/6X1knCbbZr">pic.twitter.com/6X1knCbbZr</a></p>&mdash; Matthew Erbs (@MatthewErbs) <a href="https://twitter.com/MatthewErbs/status/961776534246776832?ref_src=twsrc%5Etfw">February 9, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p>Here are some future posts when Exploring Serilog v2:</p>
+
+<ul>
+<li><a href="https://blog.merbla.com/2018/04/04/exploring-serilog-v2---the-console-sink/" target="_blank">Exploring Serilog v2 - The Console Sink</a></li>
+<li><a href="https://blog.merbla.com" target="_blank">Exploring Serilog v2 - The File Sink</a></li>
+<li><a href="https://blog.merbla.com" target="_blank">Exploring Serilog v2 - The Periodic Batching Sink</a></li>
+<li><a href="https://blog.merbla.com" target="_blank">Exploring Serilog v2 - The Async Sink</a></li>
+<li><a href="https://blog.merbla.com" target="_blank">Exploring Serilog v2 - Configuration</a></li>
+<li><a href="https://blog.merbla.com" target="_blank">Exploring Serilog v2 - App Settings</a></li>
+<li><a href="https://blog.merbla.com" target="_blank">Exploring Serilog v2 - FAQ</a></li>
+<li><a href="https://blog.merbla.com" target="_blank">Exploring Serilog v2 - The Debug Sink</a></li>
+</ul>
+
+<h3 id="get-amongst-it">Get Amongst It!!</h3>
+
+<!-- https://github.com/serilog/serilog-sinks-debug -->
+
+<!-- https://nblumhardt.com/2016/10/october-serilog-update/ -->
+
+<!-- https://github.com/destructurama/by-ignoring - passwords -->
+
+<!-- https://github.com/destructurama/attributed -->
+
+<!-- https://blog.getseq.net/serilog-tutorial/ -->
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/exploring-serilog-v2'>Exploring-serilog-v2</a></div>
+<div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/serilog'>Serilog</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/2017/04/18/setting-up-octopus-deploy-with-a-service-principal/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Setting up Octopus Deploy with a Service Principal - Azure CLI</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/2018/04/04/exploring-serilog-v2-the-console-sink/'>
+        <span class='screen-reader-text'>Next post: </span>Exploring Serilog v2 - The Console Sink<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+<section class='comments'>
+  <div class='container sep-before'>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "merbla-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2018 Matthew Erbs </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script src='/assets/js/main.89545a27.js'></script><script src='/assets/js/custom.js'></script></body>
+
+</html>
+

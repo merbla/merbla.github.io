@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Following on from my initial post here a some quick notes on the Serilog Console Sink.
+This sink has a varied history, originally packaged with the Serilog library. It was split out during the great sink split of 2015, and at that time the features were split into two projects namely the Console Sink and the Coloured Console Sink. Soon after Nick introduced the Literate Console Sink inspired by literate programming.'>
+
+<meta property='og:title' content='Exploring Serilog v2 - The Console Sink • Get Amongst It!'>
+<meta property='og:description' content='Following on from my initial post here a some quick notes on the Serilog Console Sink.
+This sink has a varied history, originally packaged with the Serilog library. It was split out during the great sink split of 2015, and at that time the features were split into two projects namely the Console Sink and the Coloured Console Sink. Soon after Nick introduced the Literate Console Sink inspired by literate programming.'>
+<meta property='og:url' content='https://merbla.com/2018/04/04/exploring-serilog-v2-the-console-sink/'>
+<meta property='og:site_name' content='Get Amongst It!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='serilog'><meta property='article:published_time' content='2018-04-04T00:00:00&#43;10:00'/><meta property='article:modified_time' content='2018-04-04T00:00:00&#43;10:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
+
+<meta name="generator" content="Hugo 0.36" />
+
+  <title>Exploring Serilog v2 - The Console Sink • Get Amongst It!</title>
+  <link rel='canonical' href='https://merbla.com/2018/04/04/exploring-serilog-v2-the-console-sink/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.9efb8af6.css'><link rel='stylesheet' href='/assets/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-54363470-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    Get Amongst It!
+    </h2>
+    <div class='desc'>
+    Matthew&#39;s Musings
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/serilog' style='font-size:1.5em'>Serilog</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:2em'>Splunk</a>
+      </li><li>
+        <a href='/tags/activedirectory' style='font-size:1em'>Activedirectory</a>
+      </li><li>
+        <a href='/tags/ad' style='font-size:1em'>Ad</a>
+      </li><li>
+        <a href='/tags/azure' style='font-size:1.3333333333333333em'>Azure</a>
+      </li><li>
+        <a href='/tags/beginner' style='font-size:1em'>Beginner</a>
+      </li><li>
+        <a href='/tags/bouldering' style='font-size:1em'>Bouldering</a>
+      </li><li>
+        <a href='/tags/cli' style='font-size:1em'>Cli</a>
+      </li><li>
+        <a href='/tags/climbing' style='font-size:1em'>Climbing</a>
+      </li><li>
+        <a href='/tags/devops' style='font-size:1.1666666666666667em'>Devops</a>
+      </li><li>
+        <a href='/tags/dotnet' style='font-size:1em'>Dotnet</a>
+      </li><li>
+        <a href='/tags/github' style='font-size:1em'>Github</a>
+      </li><li>
+        <a href='/tags/octopusdeploy' style='font-size:1.6666666666666665em'>Octopusdeploy</a>
+      </li><li>
+        <a href='/tags/opensource' style='font-size:1em'>Opensource</a>
+      </li><li>
+        <a href='/tags/oss' style='font-size:1em'>Oss</a>
+      </li><li>
+        <a href='/tags/powershell' style='font-size:1.1666666666666667em'>Powershell</a>
+      </li><li>
+        <a href='/tags/serilog' style='font-size:1.1666666666666667em'>Serilog</a>
+      </li><li>
+        <a href='/tags/webapp' style='font-size:1em'>Webapp</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='https://merbla.com/posts/'>Posts</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/speaking/'>Speaking</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/about/'>About</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+ 
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Exploring Serilog v2 - The Console Sink</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2018-04-04T00:00:00&#43;10:00'>2018, Apr 04</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+5 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p>Following on from my initial <a href="http://merbla.com/2018/04/02/exploring-serilog-v2---lets-go/" target="_blank">post</a> here a some quick notes on the <a href="https://github.com/serilog/serilog-sinks-console" target="_blank">Serilog Console Sink</a>.</p>
+
+<p>This sink has a varied history, originally packaged with the Serilog library.  It was split out during <a href="https://nblumhardt.com/2015/04/monster-serilog-update-april-2015/" target="_blank">the great sink split of 2015</a>, and at that time the features were split into two projects namely the <a href="https://github.com/serilog/serilog-sinks-console" target="_blank">Console Sink</a> and the <a href="https://github.com/serilog/serilog-sinks-coloredconsole" target="_blank">Coloured Console Sink</a>.  Soon after <a href="https://twitter.com/nblumhardt" target="_blank">Nick</a>
+introduced the <a href="https://github.com/serilog/serilog-sinks-literate" target="_blank">Literate Console Sink</a> inspired by <a href="https://en.wikipedia.org/wiki/Literate_programming" target="_blank">literate programming</a>.  However not too long ago after a series of updates and changes, it made sense to <a href="https://github.com/serilog/serilog-sinks-console/issues/7" target="_blank">merge</a> these three projects/packages back together.</p>
+
+<p>So what do you get, and why would you want to use a console sink?</p>
+
+<p>First the why&hellip;  Many developers today are using container services which often default to STDOUT for logging.  In fact this is my primary use case for using the console sink.  The Console Sink makes provides a low barrier to entry if you are using .Net Core on Docker and just want to get moving.</p>
+
+<p>Let&rsquo;s open the box&hellip;</p>
+
+<p>Taking a quick shortcut from my last <a href="http://merbla.com/2018/04/02/exploring-serilog-v2---lets-go/" target="_blank">post</a> create a new console project with the following code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> System;
+<span style="color:#66d9ef">using</span> Serilog;
+
+<span style="color:#66d9ef">namespace</span> example_console
+{
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    {
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args)
+        {
+            <span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+                .<span style="color:#a6e22e">WriteTo</span>.Console()
+                .CreateLogger();
+ 
+            <span style="color:#a6e22e">Log</span>.Verbose(<span style="color:#e6db74">&#34;This is a verbose statement&#34;</span>);
+            <span style="color:#a6e22e">Log</span>.Debug(<span style="color:#e6db74">&#34;This is a debug statement&#34;</span>);
+            <span style="color:#a6e22e">Log</span>.Information(<span style="color:#e6db74">&#34;This is a info statement&#34;</span>);
+            <span style="color:#a6e22e">Log</span>.Warning(<span style="color:#e6db74">&#34;This is a warning statement&#34;</span>);
+            <span style="color:#a6e22e">Log</span>.Error(<span style="color:#66d9ef">new</span> IndexOutOfRangeException(), <span style="color:#e6db74">&#34;This is an error statement&#34;</span>);
+            <span style="color:#a6e22e">Log</span>.Fatal(<span style="color:#66d9ef">new</span> AggregateException(), <span style="color:#e6db74">&#34;This is an fatal statement&#34;</span>);
+        }
+    }
+}</code></pre></div>
+<h2 id="restricted-level">Restricted Level</h2>
+
+<p>Like most sinks, the Console Sink will allow you to override the specific events piped to the sink for a particular log level.  In the following example, only events with a severity level of <code>Error</code> or above will be sent to the Console Sink.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(restrictedToMinimumLevel: <span style="color:#a6e22e">LogEventLevel</span>.Error)
+    .CreateLogger();</code></pre></div>
+<p><strong>NOTE:</strong> Be wary, this filtering is subject to the minimum level placed on the logger.  If the logger your sink is attached to, is set to <code>MinimumLevel.Error</code>, the sink will never recieve any events lower than this severity.</p>
+
+<h2 id="themes">Themes</h2>
+
+<p>The <a href="https://github.com/serilog/serilog-sinks-console" target="_blank">Console Sink</a> comes with a number of themes out of the box.  This can be applied in config or via the fluent interface.  To use the themes, you will need <code>using Serilog.Sinks.SystemConsole.Themes;</code>.  Below is the output of the core themes.</p>
+
+<h4 id="consoletheme-none">ConsoleTheme.None</h4>
+
+<p><em>Example config</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(theme: <span style="color:#a6e22e">ConsoleTheme</span>.None)
+    .CreateLogger();</code></pre></div>
+<p><em>Output</em></p>
+
+<p><img src="/images/2018/exploring-serilog-console-theme-none.png" alt="" /></p>
+
+<h4 id="systemconsoletheme-literate">SystemConsoleTheme.Literate</h4>
+
+<p><em>Example config</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(theme: <span style="color:#a6e22e">SystemConsoleTheme</span>.Literate)
+    .CreateLogger();</code></pre></div>
+<p><em>Output</em></p>
+
+<p><img src="/images/2018/exploring-serilog-console-theme-literate.png" alt="" /></p>
+
+<h4 id="systemconsoletheme-grayscale">SystemConsoleTheme.Grayscale</h4>
+
+<p><em>Example config</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(theme: <span style="color:#a6e22e">SystemConsoleTheme</span>.Grayscale)
+    .CreateLogger();</code></pre></div>
+<p><em>Output</em></p>
+
+<p><img src="/images/2018/exploring-serilog-console-theme-grey.png" alt="" /></p>
+
+<h4 id="ansiconsoletheme-literate">AnsiConsoleTheme.Literate</h4>
+
+<p><em>Example config</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(theme: <span style="color:#a6e22e">AnsiConsoleTheme</span>.Literate)
+    .CreateLogger();</code></pre></div>
+<p><em>Output</em></p>
+
+<p><img src="/images/2018/exploring-serilog-console-theme-literate.png" alt="" /></p>
+
+<h4 id="ansiconsoletheme-grayscale">AnsiConsoleTheme.Grayscale</h4>
+
+<p><em>Example config</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(theme: <span style="color:#a6e22e">AnsiConsoleTheme</span>.Grayscale)
+    .CreateLogger();</code></pre></div>
+<p><em>Output</em></p>
+
+<p><img src="/images/2018/exploring-serilog-console-theme-ansi-grey.png" alt="" /></p>
+
+<h4 id="ansiconsoletheme-code">AnsiConsoleTheme.Code</h4>
+
+<p><em>Example config</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(theme: <span style="color:#a6e22e">AnsiConsoleTheme</span>.Code)
+    .CreateLogger();</code></pre></div>
+<p><em>Output</em></p>
+
+<p><img src="/images/2018/exploring-serilog-console-theme-ansi-code.png" alt="" /></p>
+
+<h3 id="custom-themes">Custom Themes</h3>
+
+<p>If the in-built themes are not working for you, a custom theme is a simple implementation.  In short you can implement a <code>ConsoleTheme</code> and apply that configuration to the Console sink.  Taking a look at the <a href="https://github.com/serilog/serilog-sinks-console/blob/dev/src/Serilog.Sinks.Console/Sinks/SystemConsole/Themes/AnsiConsoleTheme.cs" target="_blank">Ansi Themes</a> illustrates the process of returning a <code>Dictionary&lt;ConsoleThemeStyle, string&gt;</code> to map between the <code>ConsoleThemeStyle</code> and the expected format.  For a full list of the styles, check out the definitions at <a href="https://github.com/serilog/serilog-sinks-console/blob/dev/src/Serilog.Sinks.Console/Sinks/SystemConsole/Themes/ConsoleThemeStyle.cs" target="_blank">ConsoleThemeStyle</a>.</p>
+
+<p>If you really do need to create a custom theme, you will need to implement a few key methods.</p>
+
+<p>Here is a quick example in action that beeps on Fatal and Error events.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BeepingTheme</span> : <span style="color:#a6e22e">Serilog</span>.<span style="color:#a6e22e">Sinks</span>.<span style="color:#a6e22e">SystemConsole</span>.<span style="color:#a6e22e">Themes</span>.ConsoleTheme
+{
+    <span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// True if styling applied by the theme is written into the output, and can thus be
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// buffered and measured.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">bool</span> CanBuffer =&gt; <span style="color:#66d9ef">false</span>;
+
+    <span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// Begin a span of text in the specified &lt;paramref name=&#34;style&#34;/&gt;.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;param name=&#34;output&#34;&gt;Output destination.&lt;/param&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;param name=&#34;style&#34;&gt;Style to apply.&lt;/param&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;returns&gt;&lt;/returns&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">int</span> ResetCharCount =&gt; <span style="color:#ae81ff">0</span>;
+
+    <span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// Reset the output to un-styled colors.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;param name=&#34;output&#34;&gt;The output.&lt;/param&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> Reset(TextWriter output)
+    {
+        <span style="color:#a6e22e">Console</span>.ResetColor();
+    }
+
+    <span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// The number of characters written by the &lt;see cref=&#34;Reset(TextWriter)&#34;/&gt; method.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">int</span> Set(TextWriter output, ConsoleThemeStyle style)
+    {
+        <span style="color:#a6e22e">Console</span>.BackgroundColor = <span style="color:#a6e22e">ConsoleColor</span>.Black;
+        
+        <span style="color:#66d9ef">if</span>(style == <span style="color:#a6e22e">ConsoleThemeStyle</span>.LevelFatal || style == <span style="color:#a6e22e">ConsoleThemeStyle</span>.LevelError)
+        {
+            <span style="color:#a6e22e">Console</span>.ForegroundColor = <span style="color:#a6e22e">ConsoleColor</span>.Red;
+            <span style="color:#a6e22e">Console</span>.Beep();        
+        }   
+        <span style="color:#66d9ef">else</span>
+        {
+            <span style="color:#a6e22e">Console</span>.ForegroundColor = <span style="color:#a6e22e">ConsoleColor</span>.White;  
+        }
+        
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    }
+}
+
+.....
+
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThemes</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> BeepingTheme Beep {<span style="color:#66d9ef">get</span>; } = <span style="color:#66d9ef">new</span> BeepingTheme();
+}
+
+
+....
+
+<span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(theme: <span style="color:#a6e22e">MyThemes</span>.Beep)
+    .CreateLogger();</code></pre></div>
+<h2 id="output-templates">Output templates</h2>
+
+<p>The console sink also gives you the opportunity to change the format of the event rendered using the in built <a href="https://github.com/serilog/serilog/wiki/Writing-Log-Events#message-template-syntax" target="_blank">message template syntax</a>.  In the following example we can show the full date and time along with a full level description.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">var</span> template = <span style="color:#e6db74">&#34;[{Timestamp:yyyy-mmm-dd HH:mm:ss} {Level}] {Message}{NewLine}{Exception}&#34;</span>;
+
+<span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">WriteTo</span>.Console(outputTemplate: template)
+    .CreateLogger();</code></pre></div>
+<p>If exceptions are thrown, we see the exception is placed on a new line after the log message.</p>
+
+<pre><code>[2018-16-04 16:16:21 Information] This is a info statement
+[2018-16-04 16:16:21 Warning] This is a warning statement
+[2018-16-04 16:16:21 Error] This is an error statement
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[2018-16-04 16:16:21 Fatal] This is an fatal statement
+System.AggregateException: One or more errors occurred.
+</code></pre>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>On occasion, you may want to configure the Console Sink via a file rather than the fluent interface.  I generally use the <a href="https://github.com/serilog/serilog-settings-configuration" target="_blank">JSON</a> configuration however you can also use the <a href="https://github.com/serilog/serilog-settings-appsettings" target="_blank">XML</a> setup found in a traditional <code>app.config</code>.</p>
+
+<p>First add the required packages.</p>
+
+<ul>
+<li><code>dotnet add package Serilog.Settings.Configuration</code> - This is a Serilog package which is a nice wrapper around <code>Microsoft.Extensions.Configuration</code></li>
+<li><code>dotnet add package Microsoft.Extensions.Configuration.Json</code> - This package is for the Microsoft JSON file support.</li>
+</ul>
+
+<p>Then add an <code>appsettings.json</code>, with the following setup.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{
+  <span style="color:#e6db74">&#34;Serilog&#34;</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#34;Using&#34;</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;Serilog.Sinks.Console&#34;</span>], <span style="color:#75715e">// Set the namespace to find sinks etc.
+</span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#34;MinimumLevel&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Information&#34;</span>, <span style="color:#75715e">// Set the min level of logging
+</span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#34;WriteTo&#34;</span><span style="color:#f92672">:</span> [{
+      <span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Console&#34;</span>, <span style="color:#75715e">// Set the sink to write events to.
+</span><span style="color:#75715e"></span>      <span style="color:#e6db74">&#34;Args&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;outputTemplate&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;[{Timestamp:HH:mm:ss} {Properties} {SourceContext} [{Level}] {Message}{NewLine}{Exception}&#34;</span>, <span style="color:#75715e">// Set the min level of logging.
+</span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;theme&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Serilog.Sinks.SystemConsole.Themes.SystemConsoleTheme::Literate, Serilog.Sinks.Console&#34;</span>  <span style="color:#75715e">// Set the theme.
+</span><span style="color:#75715e"></span>      }
+    }],
+    <span style="color:#e6db74">&#34;Properties&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;Application&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Exploring Serilog&#34;</span> <span style="color:#75715e">// Enrich events with global properties.
+</span><span style="color:#75715e"></span>    }
+  }
+}</code></pre></div>
+<p>Finally, update the setup to use the <code>appsettings.json</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">var</span> configuration = <span style="color:#66d9ef">new</span> ConfigurationBuilder()
+    .SetBasePath(<span style="color:#a6e22e">Directory</span>.GetCurrentDirectory())
+    .AddJsonFile(<span style="color:#e6db74">&#34;appsettings.json&#34;</span>)
+    .Build();
+
+<span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+    .<span style="color:#a6e22e">ReadFrom</span>.Configuration(configuration)
+    .CreateLogger();</code></pre></div>
+<p>This is just a quick overview of some of the features available in the <a href="https://github.com/serilog/serilog-sinks-console" target="_blank">Serilog Console Sink</a>.</p>
+
+<h3 id="get-amongst-it">Get Amongst It!!</h3>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/exploring-serilog-v2'>Exploring-serilog-v2</a></div>
+<div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/serilog'>Serilog</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/2018/04/02/exploring-serilog-v2-lets-go/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Exploring Serilog v2 - Lets Go!</a>
+    </div></div>
+</nav>
+
+
+<section class='comments'>
+  <div class='container sep-before'>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "merbla-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2018 Matthew Erbs </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script src='/assets/js/main.89545a27.js'></script><script src='/assets/js/custom.js'></script></body>
+
+</html>
+
