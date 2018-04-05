@@ -12,20 +12,20 @@
     
     <item>
       <title>Exploring Serilog v2 - The Console Sink</title>
-      <link>https://merbla.com/2018/04/04/exploring-serilog-v2-the-console-sink/</link>
+      <link>https://merbla.com/2018/04/04/exploring-serilog-v2---the-console-sink/</link>
       <pubDate>Wed, 04 Apr 2018 00:00:00 +1000</pubDate>
       
-      <guid>https://merbla.com/2018/04/04/exploring-serilog-v2-the-console-sink/</guid>
+      <guid>https://merbla.com/2018/04/04/exploring-serilog-v2---the-console-sink/</guid>
       <description>Following on from my initial post here a some quick notes on the Serilog Console Sink.
 This sink has a varied history, originally packaged with the Serilog library. It was split out during the great sink split of 2015, and at that time the features were split into two projects namely the Console Sink and the Coloured Console Sink. Soon after Nick introduced the Literate Console Sink inspired by literate programming.</description>
     </item>
     
     <item>
       <title>Exploring Serilog v2 - Lets Go!</title>
-      <link>https://merbla.com/2018/04/02/exploring-serilog-v2-lets-go/</link>
+      <link>https://merbla.com/2018/04/02/exploring-serilog-v2---lets-go/</link>
       <pubDate>Mon, 02 Apr 2018 17:19:02 +1000</pubDate>
       
-      <guid>https://merbla.com/2018/04/02/exploring-serilog-v2-lets-go/</guid>
+      <guid>https://merbla.com/2018/04/02/exploring-serilog-v2---lets-go/</guid>
       <description>Serilog has been around for some time and since then the ecosystem has grown and been developed behind a fantasic community and the leadership of Nick. I have been lucky enough to be involved for some time as a co-owner of Serilog however I still find myself forgetting key areas of the platform.
 As as a result, I thought I start a series of posts addressing areas that are commonly asked about either in our Gitter Channel, on GitHub or elsewhere.</description>
     </item>
