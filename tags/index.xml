@@ -5,10 +5,19 @@
     <link>https://merbla.com/tags/</link>
     <description>Recent content in Tags on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 27 Oct 2016 10:55:27 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jun 2016 23:34:35 +0000</lastBuildDate>
     
 	<atom:link href="https://merbla.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>.net</title>
+      <link>https://merbla.com/tags/.net/</link>
+      <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
+      
+      <guid>https://merbla.com/tags/.net/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Activedirectory</title>
@@ -83,15 +92,6 @@
     </item>
     
     <item>
-      <title>Dotnet</title>
-      <link>https://merbla.com/tags/dotnet/</link>
-      <pubDate>Thu, 02 Jun 2016 23:34:35 +0000</pubDate>
-      
-      <guid>https://merbla.com/tags/dotnet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Github</title>
       <link>https://merbla.com/tags/github/</link>
       <pubDate>Thu, 24 Nov 2016 21:33:45 +0000</pubDate>
@@ -106,15 +106,6 @@
       <pubDate>Tue, 18 Apr 2017 06:19:52 +0000</pubDate>
       
       <guid>https://merbla.com/tags/octopusdeploy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Opensource</title>
-      <link>https://merbla.com/tags/opensource/</link>
-      <pubDate>Thu, 24 Nov 2016 21:33:45 +0000</pubDate>
-      
-      <guid>https://merbla.com/tags/opensource/</guid>
       <description></description>
     </item>
     
@@ -139,16 +130,7 @@
     <item>
       <title>Serilog</title>
       <link>https://merbla.com/tags/serilog/</link>
-      <pubDate>Mon, 02 Apr 2018 17:19:02 +1000</pubDate>
-      
-      <guid>https://merbla.com/tags/serilog/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Serilog</title>
-      <link>https://merbla.com/tags/serilog/</link>
-      <pubDate>Mon, 02 Apr 2018 17:19:02 +1000</pubDate>
+      <pubDate>Wed, 04 Apr 2018 00:00:00 +1000</pubDate>
       
       <guid>https://merbla.com/tags/serilog/</guid>
       <description></description>
@@ -157,7 +139,16 @@
     <item>
       <title>Splunk</title>
       <link>https://merbla.com/tags/splunk/</link>
-      <pubDate>Thu, 24 Nov 2016 21:33:45 +0000</pubDate>
+      <pubDate>Mon, 12 Oct 2015 11:34:00 +0000</pubDate>
+      
+      <guid>https://merbla.com/tags/splunk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Splunk</title>
+      <link>https://merbla.com/tags/splunk/</link>
+      <pubDate>Mon, 12 Oct 2015 11:34:00 +0000</pubDate>
       
       <guid>https://merbla.com/tags/splunk/</guid>
       <description></description>
