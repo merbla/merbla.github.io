@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='This is the next post in a series re-discovering Serilog v2.
+In this post, ASP.Net Core will be the focus. Along with .Net Core, ASP.Net Core has experienced significant changes over the past few years. As such Serilog has adapted accordingly.
+In this post, tooling is as follows.
+dotnet --info .NET Command Line Tools (2.1.4) Product Information: Version: 2.1.4 Commit SHA-1 hash: 5e8add2190 Runtime Environment: OS Name: Mac OS X OS Version: 10.'>
+
+<meta property='og:title' content='Exploring Serilog v2 - ASP.Net Core • Get Amongst It!'>
+<meta property='og:description' content='This is the next post in a series re-discovering Serilog v2.
+In this post, ASP.Net Core will be the focus. Along with .Net Core, ASP.Net Core has experienced significant changes over the past few years. As such Serilog has adapted accordingly.
+In this post, tooling is as follows.
+dotnet --info .NET Command Line Tools (2.1.4) Product Information: Version: 2.1.4 Commit SHA-1 hash: 5e8add2190 Runtime Environment: OS Name: Mac OS X OS Version: 10.'>
+<meta property='og:url' content='https://merbla.com/2018/04/10/exploring-serilog-v2---asp.net-core/'>
+<meta property='og:site_name' content='Get Amongst It!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='serilog'><meta property='article:published_time' content='2018-04-10T00:00:00&#43;10:00'/><meta property='article:modified_time' content='2018-04-10T00:00:00&#43;10:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
+
+<meta name="generator" content="Hugo 0.36" />
+
+  <title>Exploring Serilog v2 - ASP.Net Core • Get Amongst It!</title>
+  <link rel='canonical' href='https://merbla.com/2018/04/10/exploring-serilog-v2---asp.net-core/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.9efb8af6.css'><link rel='stylesheet' href='/assets/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-54363470-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    Get Amongst It!
+    </h2>
+    <div class='desc'>
+    Matthew&#39;s Musings
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/.net' style='font-size:1em'>.net</a>
+      </li><li>
+        <a href='/tags/octopus-deploy' style='font-size:1.5714285714285714em'>Octopus Deploy</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:1.1428571428571428em'>Splunk</a>
+      </li><li>
+        <a href='/tags/activedirectory' style='font-size:1em'>Activedirectory</a>
+      </li><li>
+        <a href='/tags/ad' style='font-size:1em'>Ad</a>
+      </li><li>
+        <a href='/tags/azure' style='font-size:1.2857142857142856em'>Azure</a>
+      </li><li>
+        <a href='/tags/beginner' style='font-size:1em'>Beginner</a>
+      </li><li>
+        <a href='/tags/bouldering' style='font-size:1em'>Bouldering</a>
+      </li><li>
+        <a href='/tags/cli' style='font-size:1em'>Cli</a>
+      </li><li>
+        <a href='/tags/climbing' style='font-size:1em'>Climbing</a>
+      </li><li>
+        <a href='/tags/devops' style='font-size:1.1428571428571428em'>Devops</a>
+      </li><li>
+        <a href='/tags/github' style='font-size:1em'>Github</a>
+      </li><li>
+        <a href='/tags/oss' style='font-size:1em'>Oss</a>
+      </li><li>
+        <a href='/tags/powershell' style='font-size:1.1428571428571428em'>Powershell</a>
+      </li><li>
+        <a href='/tags/serilog' style='font-size:2em'>Serilog</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:1.5714285714285714em'>Splunk</a>
+      </li><li>
+        <a href='/tags/webapp' style='font-size:1em'>Webapp</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='https://merbla.com/posts/'>Posts</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/speaking/'>Speaking</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/about/'>About</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+ 
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Exploring Serilog v2 - ASP.Net Core</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2018-04-10T00:00:00&#43;10:00'>2018, Apr 10</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+5 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p>This is the next post in a <a href="http://merbla.com/categories/exploring-serilog-v2/" target="_blank">series</a> re-discovering <a href="Serilog" target="_blank">Serilog</a> v2.</p>
+
+<p>In this post, ASP.Net Core will be the focus.  Along with .Net Core, ASP.Net Core has experienced significant changes over the past few years.  As such Serilog has adapted accordingly.</p>
+
+<p>In this post, tooling is as follows.</p>
+
+<pre><code>dotnet --info
+
+.NET Command Line Tools (2.1.4)
+
+Product Information:
+ Version:            2.1.4
+ Commit SHA-1 hash:  5e8add2190
+
+Runtime Environment:
+ OS Name:     Mac OS X
+ OS Version:  10.12
+ OS Platform: Darwin
+ RID:         osx.10.12-x64
+ Base Path:   /usr/local/share/dotnet/sdk/2.1.4/
+
+Microsoft .NET Core Shared Framework Host
+
+  Version  : 2.0.5
+  Build    : 17373eb129b3b05aa18ece963f8795d65ef8ea54
+</code></pre>
+
+<p>To start, create a new project ASP.NET project using the Web API template. And spin it up, and hit the <code>http://localhost:5000/api/values</code> endpoint.</p>
+
+<ul>
+<li><code>dotnet new webapi -n example-api</code></li>
+<li><code>cd example-api</code></li>
+<li><code>dotnet run</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Hosting environment: Production
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.</code></pre></div>
+<p>As you can see from the console output above, you do not get a lot of information from the default setup.</p>
+
+<p>Open the <code>appsettings.json</code> file and update the default logging levels to information.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{
+  <span style="color:#e6db74">&#34;Logging&#34;</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#34;IncludeScopes&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+    <span style="color:#e6db74">&#34;Debug&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;LogLevel&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;Default&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Information&#34;</span>
+      }
+    },
+    <span style="color:#e6db74">&#34;Console&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;LogLevel&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;Default&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Information&#34;</span>
+      }
+    }
+  }
+}</code></pre></div>
+<p>Now run the app, and once again hit the <code>http://localhost:5000/api/values</code> endpoint.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span>
+      User profile is available. Using <span style="color:#e6db74">&#39;/Users/matthewerbs/.aspnet/DataProtection-Keys&#39;</span> as key repository; keys will not be encrypted at rest.
+Hosting environment: Production
+Content root path: /Users/matthewerbs/Code/blog/scratch/aspnet/example-api
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>
+      Request starting HTTP/1.1 GET http://localhost:5000/api/values
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>
+      Executing action method example_api.Controllers.ValuesController.Get <span style="color:#f92672">(</span>example-api<span style="color:#f92672">)</span> with arguments <span style="color:#f92672">((</span>null<span style="color:#f92672">))</span> - ModelState is Valid
+info: Microsoft.AspNetCore.Mvc.Internal.ObjectResultExecutor<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>
+      Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker<span style="color:#f92672">[</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span>
+      Executed action example_api.Controllers.ValuesController.Get <span style="color:#f92672">(</span>example-api<span style="color:#f92672">)</span> in <span style="color:#ae81ff">45</span>.156ms
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost<span style="color:#f92672">[</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span>
+      Request finished in <span style="color:#ae81ff">123</span>.375ms <span style="color:#ae81ff">200</span> application/json; charset<span style="color:#f92672">=</span>utf-8</code></pre></div>
+<p>Not a great deal better and certainly not helping in a production system.  Let&rsquo;s now add some Serilog goodness.</p>
+
+<ul>
+<li><code>dotnet add package Serilog.AspNetCore</code></li>
+<li><code>dotnet add package Serilog.Sinks.Console</code></li>
+<li><code>dotnet add package Serilog.Sinks.File</code></li>
+<li><code>dotnet add package Serilog.Settings.Configuration</code></li>
+</ul>
+
+<p>Open the <code>Program.cs</code> and update with the following.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> System;
+<span style="color:#66d9ef">using</span> System.Collections.Generic;
+<span style="color:#66d9ef">using</span> System.IO;
+<span style="color:#66d9ef">using</span> System.Linq;
+<span style="color:#66d9ef">using</span> System.Threading.Tasks;
+<span style="color:#66d9ef">using</span> Microsoft.AspNetCore;
+<span style="color:#66d9ef">using</span> Microsoft.AspNetCore.Hosting;
+<span style="color:#66d9ef">using</span> Microsoft.Extensions.Configuration;
+<span style="color:#66d9ef">using</span> Microsoft.Extensions.Logging;
+
+<span style="color:#66d9ef">namespace</span> example_api
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    {
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args)
+        {
+            <span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+                .<span style="color:#a6e22e">MinimumLevel</span>.Information()
+                .<span style="color:#a6e22e">Enrich</span>.FromLogContext()
+                .<span style="color:#a6e22e">WriteTo</span>.Console()
+                .CreateLogger();
+
+            <span style="color:#66d9ef">try</span>
+            {
+                <span style="color:#a6e22e">Log</span>.Information(<span style="color:#e6db74">&#34;Starting web host&#34;</span>);
+                BuildWebHost(args).Run();
+                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+            }
+            <span style="color:#66d9ef">catch</span> (Exception ex)
+            {
+                <span style="color:#a6e22e">Log</span>.Fatal(ex, <span style="color:#e6db74">&#34;Host terminated unexpectedly&#34;</span>);
+                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+            }
+            <span style="color:#66d9ef">finally</span>
+            {
+                <span style="color:#a6e22e">Log</span>.Information(<span style="color:#e6db74">&#34;Flushing logs&#34;</span>);
+                <span style="color:#a6e22e">Log</span>.CloseAndFlush();
+            }
+        }
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> IWebHost BuildWebHost(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args) =&gt;
+            <span style="color:#a6e22e">WebHost</span>.CreateDefaultBuilder(args)
+                .UseKestrel()
+                .UseStartup&lt;Startup&gt;()
+                .UseSerilog() <span style="color:#75715e">// &lt;- Plug Serilog into the pipeline
+</span><span style="color:#75715e"></span>                .Build();
+    }
+}</code></pre></div>
+<p>The code above triggers a number of key changes.</p>
+
+<ul>
+<li>The <code>try/catch</code> wraps one of the most important parts of any application.  The setup of the application&rsquo;s logging infrastructure.  If this is not working, there are dark days ahead.</li>
+<li><code>.UseSerilog()</code> is the key area in which Serilog is pushed into the logging pipeline of ASP.Net Core.</li>
+</ul>
+
+<p>Running the app again will provide slightly more readable output.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:55:55 INF<span style="color:#f92672">]</span> Starting web host
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:55:56 INF<span style="color:#f92672">]</span> User profile is available. Using <span style="color:#e6db74">&#39;/Users/matthewerbs/.aspnet/DataProtection-Keys&#39;</span> as key repository; keys will not be encrypted at rest.
+Hosting environment: Production
+Content root path: /Users/matthewerbs/Code/blog/exploring-serilog/aspnet/example-api
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:56:03 INF<span style="color:#f92672">]</span> Request starting HTTP/1.1 GET http://localhost:5000/api/values
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:56:03 INF<span style="color:#f92672">]</span> Executing action method example_api.Controllers.ValuesController.Get <span style="color:#f92672">(</span>example-api<span style="color:#f92672">)</span> with arguments <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span> - ModelState is Valid
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:56:03 INF<span style="color:#f92672">]</span> Executing ObjectResult, writing value Microsoft.AspNetCore.Mvc.ControllerContext.
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:56:03 INF<span style="color:#f92672">]</span> Executed action example_api.Controllers.ValuesController.Get <span style="color:#f92672">(</span>example-api<span style="color:#f92672">)</span> in <span style="color:#ae81ff">51</span>.13ms
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:56:03 INF<span style="color:#f92672">]</span> Request finished in <span style="color:#ae81ff">123</span>.563ms <span style="color:#ae81ff">200</span> application/json; charset<span style="color:#f92672">=</span>utf-8</code></pre></div>
+<p>Now for a few more changes.  Firstly, change the setup of the app to source configuration from an <code>appsettings.json</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> System;
+<span style="color:#66d9ef">using</span> System.Collections.Generic;
+<span style="color:#66d9ef">using</span> System.IO;
+<span style="color:#66d9ef">using</span> System.Linq;
+<span style="color:#66d9ef">using</span> System.Threading.Tasks;
+<span style="color:#66d9ef">using</span> Microsoft.AspNetCore;
+<span style="color:#66d9ef">using</span> Microsoft.AspNetCore.Hosting;
+<span style="color:#66d9ef">using</span> Microsoft.Extensions.Configuration;
+<span style="color:#66d9ef">using</span> Microsoft.Extensions.Logging;
+<span style="color:#66d9ef">using</span> Serilog.Events;
+<span style="color:#66d9ef">using</span> Serilog.Core;
+<span style="color:#66d9ef">using</span> Serilog;
+
+<span style="color:#66d9ef">namespace</span> example_api
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    {
+        <span style="color:#75715e">// ASP.Net Core configuration
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> IConfiguration Configuration { <span style="color:#66d9ef">get</span>; } = <span style="color:#66d9ef">new</span> ConfigurationBuilder()
+            .SetBasePath(<span style="color:#a6e22e">Directory</span>.GetCurrentDirectory())
+            .AddJsonFile(<span style="color:#e6db74">&#34;appsettings.json&#34;</span>, optional: <span style="color:#66d9ef">false</span>, reloadOnChange: <span style="color:#66d9ef">true</span>)
+            .Build();
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args)
+        { 
+            <span style="color:#75715e">// Apply the config to the logger
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+                .<span style="color:#a6e22e">ReadFrom</span>.Configuration(Configuration)
+                .CreateLogger();
+ 
+            <span style="color:#66d9ef">try</span>
+            {
+                <span style="color:#a6e22e">Log</span>.Information(<span style="color:#e6db74">&#34;Starting web host&#34;</span>);
+                BuildWebHost(args).Run();
+                <span style="color:#66d9ef">return</span>;
+            }
+            <span style="color:#66d9ef">catch</span> (Exception ex)
+            {
+                <span style="color:#a6e22e">Log</span>.Fatal(ex, <span style="color:#e6db74">&#34;Host terminated unexpectedly&#34;</span>);
+                <span style="color:#66d9ef">return</span>;
+            }
+            <span style="color:#66d9ef">finally</span>
+            {
+                <span style="color:#a6e22e">Log</span>.Information(<span style="color:#e6db74">&#34;Flushing logs&#34;</span>);
+                <span style="color:#a6e22e">Log</span>.CloseAndFlush();
+            }
+        }
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> IWebHost BuildWebHost(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args) =&gt;
+            <span style="color:#a6e22e">WebHost</span>.CreateDefaultBuilder(args)
+                .UseStartup&lt;Startup&gt;()
+                .UseSerilog() <span style="color:#75715e">// &lt;- Plug Serilog into the pipeline
+</span><span style="color:#75715e"></span>                .UseKestrel()
+                .Build();
+    }
+}</code></pre></div>
+<p>Secondly, update the <code>appsettings.json</code> file (below).  This will add a number of instructions.</p>
+
+<ul>
+<li>Sets the minumum level to <code>Information</code> whilst also reducing some of the noise created from the <code>Microsoft</code> and <code>System</code> namespaces.</li>
+<li>Sets up the <code>Console</code> &amp; <code>File</code> sink as destinations.</li>
+<li>Adds some property enrichment.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{
+  <span style="color:#e6db74">&#34;Serilog&#34;</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#34;MinimumLevel&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;Default&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Debug&#34;</span>,
+      <span style="color:#e6db74">&#34;Override&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;Microsoft&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Debug&#34;</span>,
+        <span style="color:#e6db74">&#34;System&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Debug&#34;</span>
+      }
+    },
+    <span style="color:#e6db74">&#34;Using&#34;</span><span style="color:#f92672">:</span> [
+      <span style="color:#e6db74">&#34;Serilog.Sinks.Console&#34;</span>,
+      <span style="color:#e6db74">&#34;Serilog.Sinks.File&#34;</span>
+    ],
+    <span style="color:#e6db74">&#34;Enrich&#34;</span><span style="color:#f92672">:</span> [
+      <span style="color:#e6db74">&#34;FromLogContext&#34;</span>
+    ],
+    <span style="color:#e6db74">&#34;WriteTo&#34;</span><span style="color:#f92672">:</span> [{
+        <span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;File&#34;</span>,
+        <span style="color:#e6db74">&#34;Args&#34;</span><span style="color:#f92672">:</span> {
+          <span style="color:#e6db74">&#34;path&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;serilog-configuration-sample.txt&#34;</span>
+        }
+      },
+      {
+        <span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Console&#34;</span>,
+        <span style="color:#e6db74">&#34;Args&#34;</span><span style="color:#f92672">:</span> {
+          <span style="color:#e6db74">&#34;outputTemplate&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;[{Timestamp} [{Level}] {Message}{NewLine}{Exception} {Properties}&#34;</span>,
+          <span style="color:#e6db74">&#34;theme&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Serilog.Sinks.SystemConsole.Themes.SystemConsoleTheme::Literate, Serilog.Sinks.Console&#34;</span>
+        }
+      }
+    ],
+    <span style="color:#e6db74">&#34;Properties&#34;</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#34;Application&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Exploring Serilog v2&#34;</span>
+    }
+  }
+}</code></pre></div>
+<p>Finally, let&rsquo;s add a simple middleware class to add some basic HTTP information on a request.  Add a new file called <code>SimpleSerilogMiddleware.cs</code> and the following code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> Microsoft.AspNetCore.Http;
+<span style="color:#66d9ef">using</span> Serilog;
+<span style="color:#66d9ef">using</span> Serilog.Events;
+<span style="color:#66d9ef">using</span> System;
+<span style="color:#66d9ef">using</span> System.Diagnostics;
+<span style="color:#66d9ef">using</span> System.Linq;
+<span style="color:#66d9ef">using</span> System.Threading.Tasks;
+
+<span style="color:#66d9ef">namespace</span> example_api
+{
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleSerilogMiddleware</span>
+    {
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> ILogger Log = <span style="color:#a6e22e">Serilog</span>.<span style="color:#a6e22e">Log</span>.ForContext&lt;SimpleSerilogMiddleware&gt;();
+
+        <span style="color:#66d9ef">readonly</span> RequestDelegate _next;
+
+        <span style="color:#66d9ef">public</span> SimpleSerilogMiddleware(RequestDelegate next)
+        {
+            <span style="color:#66d9ef">if</span> (next == <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ArgumentNullException(nameof(next));
+            _next = next;
+        }
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">async</span> Task Invoke(HttpContext httpContext)
+        {
+            <span style="color:#66d9ef">if</span> (httpContext == <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ArgumentNullException(nameof(httpContext));
+ 
+            <span style="color:#66d9ef">await</span> _next(httpContext);
+            <span style="color:#66d9ef">var</span> statusCode = <span style="color:#a6e22e">httpContext</span>.Response?.StatusCode;
+            <span style="color:#a6e22e">Log</span>.Information(<span style="color:#e6db74">&#34;{client} {protocol} {path} {code} {length} &#34;</span>, <span style="color:#a6e22e">httpContext</span>.<span style="color:#a6e22e">Connection</span>.RemoteIpAddress, <span style="color:#a6e22e">httpContext</span>.<span style="color:#a6e22e">Request</span>.Method, <span style="color:#a6e22e">httpContext</span>.<span style="color:#a6e22e">Request</span>.Protocol, <span style="color:#a6e22e">httpContext</span>.<span style="color:#a6e22e">Request</span>.Path, <span style="color:#a6e22e">httpContext</span>.Response?.StatusCode, <span style="color:#a6e22e">httpContext</span>.Response?.ContentLength);
+        }
+    }
+}</code></pre></div>
+<p>And wire it up via <code>Startup.cs</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+   ...
+   <span style="color:#a6e22e">app</span>.UseMiddleware&lt;SimpleSerilogMiddleware&gt;();
+   ...
+}</code></pre></div>
+<p>Run the app once last time and <code>curl</code> a few routes, the following is an example output.</p>
+
+<pre><code>[14:20:59 INF] 127.0.0.1 GET HTTP/1.1 /api/values 200
+[14:21:00 INF] 127.0.0.1 GET HTTP/1.1 /api/values 200
+</code></pre>
+
+<p>Considering the number of changes between ASP.Net Core, .Net Core and Serilog over the past few years, it is comforting to think such a simple setup gives you such extensibility.</p>
+
+<p>The example in full can be found over at <a href="https://github.com/merbla/exploring-serilog/tree/master/aspnet/example-api" target="_blank">GitHub</a>.</p>
+
+<h3 id="get-amongst-it">Get Amongst It!!</h3>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/exploring-serilog-v2'>Exploring-serilog-v2</a></div>
+<div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/serilog'>Serilog</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/2018/04/05/exploring-serilog-v2---configuration/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Exploring Serilog v2 - Configuration</a>
+    </div></div>
+</nav>
+
+
+<section class='comments'>
+  <div class='container sep-before'>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "merbla-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2018 Matthew Erbs </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script src='/assets/js/main.89545a27.js'></script><script src='/assets/js/custom.js'></script></body>
+
+</html>
+
