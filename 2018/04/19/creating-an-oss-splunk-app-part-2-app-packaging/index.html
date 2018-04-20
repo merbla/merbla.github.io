@@ -4,20 +4,20 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='Matthew&#39;s Musings'>
+<meta name='description' content='Sometime ago I blogged about setting up a Splunk app in GitHub with builds and the rest. I just wanted to clean up the inital setup using another tool that is available from Splunk. The Splunk Packaging Toolkit has been around for sometime however now it has been released with recent versions of the Splunk product.
+The toolkit provides a number of features, one of which is packaging Splunk apps.'>
 
-<meta property='og:title' content='Tag: Bouldering • Get Amongst It!'>
-<meta property='og:description' content='Matthew&#39;s Musings'>
-<meta property='og:url' content='https://merbla.com/tags/bouldering/'>
+<meta property='og:title' content='Creating an OSS Splunk App Part 2: App Packaging • Get Amongst It!'>
+<meta property='og:description' content='Sometime ago I blogged about setting up a Splunk app in GitHub with builds and the rest. I just wanted to clean up the inital setup using another tool that is available from Splunk. The Splunk Packaging Toolkit has been around for sometime however now it has been released with recent versions of the Splunk product.
+The toolkit provides a number of features, one of which is packaging Splunk apps.'>
+<meta property='og:url' content='https://merbla.com/2018/04/19/creating-an-oss-splunk-app-part-2-app-packaging/'>
 <meta property='og:site_name' content='Get Amongst It!'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content='2018-04-19T00:00:00&#43;10:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='splunk'><meta property='article:published_time' content='2018-04-19T00:00:00&#43;10:00'/><meta property='article:modified_time' content='2018-04-19T00:00:00&#43;10:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
 
 <meta name="generator" content="Hugo 0.36" />
 
-  <title>Tag: Bouldering • Get Amongst It!</title>
-  <link rel='canonical' href='https://merbla.com/tags/bouldering/'>
-  
-    <link href="https://merbla.com/tags/bouldering/index.xml" rel="alternate" type="application/rss+xml" title="Get Amongst It!" />
+  <title>Creating an OSS Splunk App Part 2: App Packaging • Get Amongst It!</title>
+  <link rel='canonical' href='https://merbla.com/2018/04/19/creating-an-oss-splunk-app-part-2-app-packaging/'>
   
   
   <link rel='icon' href='/favicon.ico'>
@@ -32,7 +32,7 @@ ga('send', 'pageview');
 </head>
 
 
-<body class='taxonomy type-tags taxonomy-tag has-sidebar sidebar-sticky'>
+<body class='page type-posts has-sidebar sidebar-sticky'>
 
   <div class='site'>
 
@@ -177,44 +177,142 @@ ga('send', 'pageview');
       <main id='content'>
 
 
-<header class='header'>
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
   <div class='container sep-after'>
     <div class='header-info'>
-      <h1 class='title'><span class='taxonomy-name'>Tag: </span>Bouldering</h1>
-
+      <h1 class='title'>Creating an OSS Splunk App Part 2: App Packaging</h1>
       
 
     </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2018-04-19T00:00:00&#43;10:00'>2018, Apr 19</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
   </div>
 </header>
 
-
-
-
-<div class='container list-container'>
-  <ul class='list'>
-    
-      <li class='item'>
-  <div class='meta'>
-    <span>
-  <span class='screen-reader-text'>Posted on </span>
-  <time datetime='2014-11-07T23:09:00Z'>2014, Nov 07</time>
-</span>
-
-  </div>
-  <header class='item-header'>
-    <h3 class='item-title'>
-      <a href='/2014/11/07/building-a-bouldering-wall/'>Building a bouldering wall</a>
-    </h3>
-  </header>
-</li>
-
-    
-  </ul>
-
+  
   
 
+  <div class='container entry-content'>
+  
+
+<p>Sometime ago I <a href="https://merbla.com/2016/11/24/creating-an-oss-splunk-app-part-1-setup/" target="_blank">blogged</a> about setting up a Splunk app in GitHub with builds and the rest.  I just wanted to clean up the inital setup using another tool that is available from Splunk.  The <a href="https://dev.splunk.com/view/packaging-toolkit/SP-CAAAE9V" target="_blank">Splunk Packaging Toolkit</a> has been around for sometime however now it has been released with recent versions of the Splunk product.</p>
+
+<p>The toolkit provides a number of features, one of which is packaging Splunk apps.  Given the previous example on <a href="https://github.com/merbla/splunk-octopusdeploy-add-on" target="_blank">GitHub</a> it is straight forward to setup and I was able to considerably clean up the build script.</p>
+
+<p>Firstly, I moved the source of the app into a sub folder representative of the app folder used for packaging.  In this case <code>src/octopus_deploy_addon/</code>.</p>
+
+<p>Then I created a manifest for the Splunk app via the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">slim generate-manifest src/ -o src/octopus_deploy_addon/app.manifest</code></pre></div>
+<p>In terms of the build, not a lot changed other than ensuring the Packaging Toolkit was added before the build started.</p>
+
+<p>Below is a snip from the <a href="https://travis-ci.org/merbla/splunk-octopusdeploy-add-on" target="_blank">Travis Build</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language: python
+sudo: <span style="color:#66d9ef">false</span>
+python:
+- <span style="color:#e6db74">&#39;2.7&#39;</span>
+before_install:
+- wget --output-document splunk-appinspect.tar.gz http://dev.splunk.com/goto/appinspectdownload
+- pip install splunk-appinspect.tar.gz
+- pip install http://download.splunk.com/misc/packaging-toolkit/splunk-packaging-toolkit-<span style="color:#ae81ff">1.0</span>.<span style="color:#ae81ff">0.</span>tar.gz
+install:
+- pip install bumpversion
+script:
+- <span style="color:#e6db74">&#34;./build.sh&#34;</span></code></pre></div>
+<p>In the <code>build.sh</code> file, I was able to focus on the key areas of packaging, testing and pushing a release.  The updated build script can be found over at <a href="https://github.com/merbla/splunk-octopusdeploy-add-on/blob/master/build.sh" target="_blank">GitHub</a>.</p>
+
+<p>So, try it out and I can assure you packaging Splunk apps has never been easier.</p>
+
+<h3 id="get-amongst-it">Get Amongst It!!</h3>
+
 </div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/splunk'>Splunk</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/2018/04/10/exploring-serilog-v2---asp.net-core/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Exploring Serilog v2 - ASP.Net Core</a>
+    </div></div>
+</nav>
+
+
+<section class='comments'>
+  <div class='container sep-before'>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "merbla-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
 
       </main>
 

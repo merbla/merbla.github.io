@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://merbla.com/2018/04/19/creating-an-oss-splunk-app-part-2-app-packaging/</loc>
+    <lastmod>2018-04-19T00:00:00+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://merbla.com/2018/04/10/exploring-serilog-v2---asp.net-core/</loc>
     <lastmod>2018-04-10T00:00:00+10:00</lastmod>
   </url>
@@ -109,7 +114,7 @@
   
   <url>
     <loc>https://merbla.com/</loc>
-    <lastmod>2018-04-10T00:00:00+10:00</lastmod>
+    <lastmod>2018-04-19T00:00:00+10:00</lastmod>
   </url>
   
   <url>
@@ -220,7 +225,7 @@
   
   <url>
     <loc>https://merbla.com/posts/</loc>
-    <lastmod>2018-04-10T00:00:00+10:00</lastmod>
+    <lastmod>2018-04-19T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   

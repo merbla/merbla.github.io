@@ -5,10 +5,20 @@
     <link>https://merbla.com/posts/</link>
     <description>Recent content in Posts on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 10 Apr 2018 00:00:00 +1000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Apr 2018 00:00:00 +1000</lastBuildDate>
     
 	<atom:link href="https://merbla.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating an OSS Splunk App Part 2: App Packaging</title>
+      <link>https://merbla.com/2018/04/19/creating-an-oss-splunk-app-part-2-app-packaging/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +1000</pubDate>
+      
+      <guid>https://merbla.com/2018/04/19/creating-an-oss-splunk-app-part-2-app-packaging/</guid>
+      <description>Sometime ago I blogged about setting up a Splunk app in GitHub with builds and the rest. I just wanted to clean up the inital setup using another tool that is available from Splunk. The Splunk Packaging Toolkit has been around for sometime however now it has been released with recent versions of the Splunk product.
+The toolkit provides a number of features, one of which is packaging Splunk apps.</description>
+    </item>
     
     <item>
       <title>Exploring Serilog v2 - ASP.Net Core</title>
