@@ -290,7 +290,11 @@ ga('send', 'pageview');
 {
     <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
     {
-        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args) =&gt; Go().GetAwaiter().GetResult();
+        <span style="color:#75715e">// Sweet C# 7.1... Thanks @dennisroche
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">async</span> Task Main()
+        {
+            <span style="color:#66d9ef">await</span> Go();
+        }
 
         <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">async</span> Task Go()
         {
