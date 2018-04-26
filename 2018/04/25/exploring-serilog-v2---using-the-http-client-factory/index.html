@@ -339,11 +339,14 @@ ga('send', 'pageview');
     } 
 }</code></pre></div>
 <p>When we run the app, the default middleware will take effect and push logs through to Serilog.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:40 INF<span style="color:#f92672">]</span> We are using Serilog!
-<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:40 INF<span style="color:#f92672">]</span> Start processing HTTP request GET https://google.com.au/
-<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:40 INF<span style="color:#f92672">]</span> Sending HTTP request GET https://google.com.au/
-<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:43 INF<span style="color:#f92672">]</span> Received HTTP response after <span style="color:#ae81ff">2469</span>.583ms - OK
-<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:43 INF<span style="color:#f92672">]</span> End processing HTTP request after <span style="color:#ae81ff">2499</span>.582ms - OK</code></pre></div>
+
+<pre><code>[11:40:40 INF] We are using Serilog!
+[11:40:40 INF] Start processing HTTP request GET https://google.com.au/
+[11:40:40 INF] Sending HTTP request GET https://google.com.au/
+[11:40:43 INF] Received HTTP response after 2469.583ms - OK
+[11:40:43 INF] End processing HTTP request after 2499.582ms - OK
+</code></pre>
+
 <p>As previously with <code>HttpClient</code> a handler can be used to extend behaviour. Below is a simple handler, that drops down to the core <code>Serilog.ILogger</code> interface.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SerilogHandler</span> : DelegatingHandler
     {
@@ -366,12 +369,15 @@ ga('send', 'pageview');
     <span style="color:#a6e22e">services</span>.AddHttpClient&lt;GoogleClient&gt;()
         .AddHttpMessageHandler&lt;SerilogHandler&gt;();</code></pre></div>
 <p>Then when the app is run, we can see both the default and Serilog specfic handling.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:40 INF<span style="color:#f92672">]</span> We are using Serilog!
-<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:40 INF<span style="color:#f92672">]</span> Start processing HTTP request GET https://google.com.au/
-<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:40 INF<span style="color:#f92672">]</span> Sending HTTP request GET https://google.com.au/
-<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:42 DBG<span style="color:#f92672">]</span> Received HTTP response after <span style="color:#ae81ff">1877</span>.623ms - OK
-<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:42 INF<span style="color:#f92672">]</span> Request completed: www.google.com.au GET OK <span style="color:#f92672">[]</span>
-<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:42 INF<span style="color:#f92672">]</span> End processing HTTP request after <span style="color:#ae81ff">1916</span>.045ms - OK</code></pre></div>
+
+<pre><code>[12:43:40 INF] We are using Serilog!
+[12:43:40 INF] Start processing HTTP request GET https://google.com.au/
+[12:43:40 INF] Sending HTTP request GET https://google.com.au/
+[12:43:42 DBG] Received HTTP response after 1877.623ms - OK
+[12:43:42 INF] Request completed: www.google.com.au GET OK []
+[12:43:42 INF] End processing HTTP request after 1916.045ms - OK
+</code></pre>
+
 <h3 id="get-amongst-it">Get Amongst It!!</h3>
 
 </div>
