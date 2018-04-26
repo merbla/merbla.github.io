@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='This is the next post in a series re-discovering Serilog v2.
+Recently, the new HTTP Client Factory was announced as apart of the ASP.NET Core 2.1 release. There have been a number of posts relating to how it can be hooked with ASP.Net.
+ ASP.NET Core 2.1-preview1: Introducing HTTPClient factory HttpClientFactory for typed HttpClient instances in ASP.NET Core 2.1  In this post, I wanted to illustrate how you can use this new package whilst swapping in Serilog&rsquo;s superior logging capabilites.'>
+
+<meta property='og:title' content='Exploring Serilog v2 - Using the HTTP Client Factory • Get Amongst It!'>
+<meta property='og:description' content='This is the next post in a series re-discovering Serilog v2.
+Recently, the new HTTP Client Factory was announced as apart of the ASP.NET Core 2.1 release. There have been a number of posts relating to how it can be hooked with ASP.Net.
+ ASP.NET Core 2.1-preview1: Introducing HTTPClient factory HttpClientFactory for typed HttpClient instances in ASP.NET Core 2.1  In this post, I wanted to illustrate how you can use this new package whilst swapping in Serilog&rsquo;s superior logging capabilites.'>
+<meta property='og:url' content='https://merbla.com/2018/04/25/exploring-serilog-v2---using-the-http-client-factory/'>
+<meta property='og:site_name' content='Get Amongst It!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='serilog'><meta property='article:published_time' content='2018-04-25T00:00:00&#43;10:00'/><meta property='article:modified_time' content='2018-04-25T00:00:00&#43;10:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@matthewerbs'>
+
+<meta name="generator" content="Hugo 0.36" />
+
+  <title>Exploring Serilog v2 - Using the HTTP Client Factory • Get Amongst It!</title>
+  <link rel='canonical' href='https://merbla.com/2018/04/25/exploring-serilog-v2---using-the-http-client-factory/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.9efb8af6.css'><link rel='stylesheet' href='/assets/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-54363470-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-posts has-sidebar sidebar-sticky'>
+
+  <div class='site'>
+
+    <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+<div id='sidebar' class='sidebar'>
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    Get Amongst It!
+    </h2>
+    <div class='desc'>
+    Matthew&#39;s Musings
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+<section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/.net' style='font-size:1em'>.net</a>
+      </li><li>
+        <a href='/tags/octopus-deploy' style='font-size:1.5em'>Octopus Deploy</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:1.125em'>Splunk</a>
+      </li><li>
+        <a href='/tags/activedirectory' style='font-size:1em'>Activedirectory</a>
+      </li><li>
+        <a href='/tags/ad' style='font-size:1em'>Ad</a>
+      </li><li>
+        <a href='/tags/azure' style='font-size:1.25em'>Azure</a>
+      </li><li>
+        <a href='/tags/beginner' style='font-size:1em'>Beginner</a>
+      </li><li>
+        <a href='/tags/bouldering' style='font-size:1em'>Bouldering</a>
+      </li><li>
+        <a href='/tags/cli' style='font-size:1em'>Cli</a>
+      </li><li>
+        <a href='/tags/climbing' style='font-size:1em'>Climbing</a>
+      </li><li>
+        <a href='/tags/devops' style='font-size:1.125em'>Devops</a>
+      </li><li>
+        <a href='/tags/github' style='font-size:1em'>Github</a>
+      </li><li>
+        <a href='/tags/oss' style='font-size:1em'>Oss</a>
+      </li><li>
+        <a href='/tags/powershell' style='font-size:1.125em'>Powershell</a>
+      </li><li>
+        <a href='/tags/serilog' style='font-size:2em'>Serilog</a>
+      </li><li>
+        <a href='/tags/splunk' style='font-size:1.625em'>Splunk</a>
+      </li><li>
+        <a href='/tags/webapp' style='font-size:1em'>Webapp</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+</div>
+
+    <div class='main'>
+
+      <nav id='main-menu' class='main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='hamburger hamburger--arrow sidebar-toggler' type='button' aria-controls='sidebar' aria-expanded='false'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+    <ul><li class='item'>
+        <a href='https://merbla.com/posts/'>Posts</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/speaking/'>Speaking</a>
+      </li><li class='item'>
+        <a href='https://merbla.com/about/'>About</a>
+      </li></ul>
+  </div>
+</nav>
+
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+ 
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Exploring Serilog v2 - Using the HTTP Client Factory</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2018-04-25T00:00:00&#43;10:00'>2018, Apr 25</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+3 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p>This is the next post in a <a href="https://merbla.com/categories/exploring-serilog-v2/" target="_blank">series</a> re-discovering <a href="Serilog" target="_blank">Serilog</a> v2.</p>
+
+<p>Recently, the new HTTP Client Factory was <a href="https://blogs.msdn.microsoft.com/webdev/2018/02/28/asp-net-core-2-1-preview1-introducing-httpclient-factory/" target="_blank">announced</a> as apart of the ASP.NET Core 2.1 release.  There have been a number of posts relating to how it can be hooked with ASP.Net.</p>
+
+<ul>
+<li><a href="https://blogs.msdn.microsoft.com/webdev/2018/02/28/asp-net-core-2-1-preview1-introducing-httpclient-factory/" target="_blank">ASP.NET Core 2.1-preview1: Introducing HTTPClient factory</a></li>
+<li><a href="https://www.hanselman.com/blog/HttpClientFactoryForTypedHttpClientInstancesInASPNETCore21.aspx" target="_blank">HttpClientFactory for typed HttpClient instances in ASP.NET Core 2.1</a></li>
+</ul>
+
+<p>In this post, I wanted to illustrate how you can use this new package whilst swapping in Serilog&rsquo;s superior logging capabilites.  The new HTTP Client Factory aids in the lifecycle and scope when using HTTP Client.</p>
+
+<p>First create a new console app</p>
+
+<ul>
+<li><code>dotnet new console -n example-console</code></li>
+<li><code>cd example-console</code></li>
+<li>Edit the <code>.csproj</code> file to get the latest preview packages.  (This will change when ASP.NET Core 2.1 is RTM)
+<br /></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Project</span> <span style="color:#a6e22e">Sdk=</span><span style="color:#e6db74">&#34;Microsoft.NET.Sdk&#34;</span><span style="color:#f92672">&gt;</span>
+
+  <span style="color:#f92672">&lt;PropertyGroup&gt;</span>
+    <span style="color:#f92672">&lt;OutputType&gt;</span>Exe<span style="color:#f92672">&lt;/OutputType&gt;</span>
+    <span style="color:#f92672">&lt;TargetFramework&gt;</span>netcoreapp2.0<span style="color:#f92672">&lt;/TargetFramework&gt;</span>
+  <span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
+
+   <span style="color:#f92672">&lt;ItemGroup&gt;</span>
+   
+    <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Serilog.Extensions.Logging&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;2.0.2&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Microsoft.Extensions.DependencyInjection&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;2.2.0-preview1-34029&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Microsoft.Extensions.Logging&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;2.2.0-preview1-34029&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Microsoft.Extensions.Http&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;2.2.0-preview1-34029&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Serilog.Sinks.Console&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;3.1.1&#34;</span> <span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;/ItemGroup&gt;</span>
+
+  <span style="color:#f92672">&lt;PropertyGroup</span> <span style="color:#a6e22e">Label=</span><span style="color:#e6db74">&#34;RestoreSources&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;RestoreSources&gt;</span>$(DotNetRestoreSources)<span style="color:#f92672">&lt;/RestoreSources&gt;</span>
+    <span style="color:#f92672">&lt;RestoreSources</span> <span style="color:#a6e22e">Condition=</span><span style="color:#e6db74">&#34;&#39;$(DotNetBuildOffline)&#39; != &#39;true&#39; AND &#39;$(AspNetUniverseBuildOffline)&#39; != &#39;true&#39; &#34;</span><span style="color:#f92672">&gt;</span>
+      $(RestoreSources);
+      https://dotnet.myget.org/F/dotnet-core/api/v3/index.json;
+      https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
+      https://dotnet.myget.org/F/aspnetcore-tools/api/v3/index.json;
+    <span style="color:#f92672">&lt;/RestoreSources&gt;</span>
+    <span style="color:#f92672">&lt;RestoreSources</span> <span style="color:#a6e22e">Condition=</span><span style="color:#e6db74">&#34;&#39;$(DotNetBuildOffline)&#39; != &#39;true&#39;&#34;</span><span style="color:#f92672">&gt;</span>
+      $(RestoreSources);
+      https://api.nuget.org/v3/index.json;
+    <span style="color:#f92672">&lt;/RestoreSources&gt;</span>
+  <span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
+<span style="color:#f92672">&lt;/Project&gt;</span></code></pre></div>
+<p>Update the <code>Program.cs</code> as follows to setup Serilog with the HTTP Client Factory.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> System;
+<span style="color:#66d9ef">using</span> System.Net.Http;
+<span style="color:#66d9ef">using</span> System.Threading;
+<span style="color:#66d9ef">using</span> System.Threading.Tasks;
+<span style="color:#66d9ef">using</span> Microsoft.Extensions.DependencyInjection;
+<span style="color:#66d9ef">using</span> Microsoft.Extensions.Logging;
+<span style="color:#66d9ef">using</span> Serilog;
+
+<span style="color:#66d9ef">namespace</span> httpclientfactory
+{
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    {
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span><span style="color:#a6e22e">[]</span> args) =&gt; Go().GetAwaiter().GetResult();
+
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">async</span> Task Go()
+        {
+            <span style="color:#a6e22e">Log</span>.Logger = <span style="color:#66d9ef">new</span> LoggerConfiguration()
+                .<span style="color:#a6e22e">MinimumLevel</span>.Debug()
+                .<span style="color:#a6e22e">WriteTo</span>.Console()
+                .CreateLogger();
+
+            <span style="color:#66d9ef">var</span> services = <span style="color:#66d9ef">new</span> ServiceCollection()
+                .AddLogging(builder =&gt;
+                {
+                    <span style="color:#75715e">// Add Serilog
+</span><span style="color:#75715e"></span>                    <span style="color:#a6e22e">builder</span>.AddSerilog();
+                });
+
+            <span style="color:#75715e">// Register a HTTP Client
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">services</span>.AddHttpClient&lt;GoogleClient&gt;(); 
+
+            <span style="color:#66d9ef">var</span> serviceProvider = <span style="color:#a6e22e">services</span>.BuildServiceProvider();
+            
+            <span style="color:#75715e">// This is the Microsoft Logging interface
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">var</span> logger = <span style="color:#a6e22e">serviceProvider</span>.GetRequiredService&lt;ILogger&lt;Program&gt;&gt;();
+            <span style="color:#a6e22e">logger</span>.LogInformation(<span style="color:#e6db74">&#34;We are using Serilog!&#34;</span>);
+
+            <span style="color:#75715e">// Get a HTTP Client and make a request
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">var</span> google = <span style="color:#a6e22e">serviceProvider</span>.GetRequiredService&lt;GoogleClient&gt;();
+            <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">google</span>.Get();
+        }
+    }
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GoogleClient</span>
+    {
+        HttpClient HttpClient { <span style="color:#66d9ef">get</span>; }
+        <span style="color:#66d9ef">public</span> GoogleClient(HttpClient client)
+        {
+            HttpClient = client;
+            <span style="color:#a6e22e">HttpClient</span>.BaseAddress = <span style="color:#66d9ef">new</span> Uri(<span style="color:#e6db74">&#34;https://google.com.au&#34;</span>);
+        }
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">async</span> Task&lt;HttpResponseMessage&gt; Get()
+        {
+            <span style="color:#66d9ef">var</span> request = <span style="color:#66d9ef">new</span> HttpRequestMessage(<span style="color:#a6e22e">HttpMethod</span>.Get, <span style="color:#e6db74">&#34;/&#34;</span>);
+            <span style="color:#66d9ef">var</span> response = <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">HttpClient</span>.SendAsync(request);
+            <span style="color:#a6e22e">response</span>.EnsureSuccessStatusCode();
+            <span style="color:#66d9ef">return</span> response;
+        }
+    } 
+}</code></pre></div>
+<p>When we run the app, the default middleware will take effect and push logs through to Serilog.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:40 INF<span style="color:#f92672">]</span> We are using Serilog!
+<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:40 INF<span style="color:#f92672">]</span> Start processing HTTP request GET https://google.com.au/
+<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:40 INF<span style="color:#f92672">]</span> Sending HTTP request GET https://google.com.au/
+<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:43 INF<span style="color:#f92672">]</span> Received HTTP response after <span style="color:#ae81ff">2469</span>.583ms - OK
+<span style="color:#f92672">[</span><span style="color:#ae81ff">11</span>:40:43 INF<span style="color:#f92672">]</span> End processing HTTP request after <span style="color:#ae81ff">2499</span>.582ms - OK</code></pre></div>
+<p>As previously with <code>HttpClient</code> a handler can be used to extend behaviour. Below is a simple handler, that drops down to the core <code>Serilog.ILogger</code> interface.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SerilogHandler</span> : DelegatingHandler
+    {
+        <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Serilog</span>.ILogger _logger;
+
+        <span style="color:#66d9ef">public</span> SerilogHandler(<span style="color:#a6e22e">Serilog</span>.ILogger logger)
+        {
+            _logger = logger;
+        }
+
+        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">override</span> Task&lt;HttpResponseMessage&gt; SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            <span style="color:#66d9ef">var</span> response = <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">base</span>.SendAsync(request, cancellationToken);
+            <span style="color:#a6e22e">_logger</span>.Debug(<span style="color:#e6db74">&#34;Request completed: {route} {method} {code} {headers}&#34;</span>, <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">RequestUri</span>.Host, <span style="color:#a6e22e">request</span>.Method, <span style="color:#a6e22e">response</span>.StatusCode, <span style="color:#a6e22e">request</span>.Headers);
+            <span style="color:#66d9ef">return</span> response;
+        }
+    }</code></pre></div>
+<p>Now if Serilog is already referenced via dependency injection, you can extend a HTTP Client as follows by registering the handler.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#a6e22e">services</span>.AddTransient&lt;SerilogHandler&gt;();
+    <span style="color:#a6e22e">services</span>.AddHttpClient&lt;GoogleClient&gt;()
+        .AddHttpMessageHandler&lt;SerilogHandler&gt;();</code></pre></div>
+<p>Then when the app is run, we can see both the default and Serilog specfic handling.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:40 INF<span style="color:#f92672">]</span> We are using Serilog!
+<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:40 INF<span style="color:#f92672">]</span> Start processing HTTP request GET https://google.com.au/
+<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:40 INF<span style="color:#f92672">]</span> Sending HTTP request GET https://google.com.au/
+<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:42 DBG<span style="color:#f92672">]</span> Received HTTP response after <span style="color:#ae81ff">1877</span>.623ms - OK
+<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:42 INF<span style="color:#f92672">]</span> Request completed: www.google.com.au GET OK <span style="color:#f92672">[]</span>
+<span style="color:#f92672">[</span><span style="color:#ae81ff">12</span>:43:42 INF<span style="color:#f92672">]</span> End processing HTTP request after <span style="color:#ae81ff">1916</span>.045ms - OK</code></pre></div>
+<h3 id="get-amongst-it">Get Amongst It!!</h3>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/exploring-serilog-v2'>Exploring-serilog-v2</a></div>
+<div class='tags'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/serilog'>Serilog</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/2018/04/19/creating-an-oss-splunk-app-part-2-app-packaging/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Creating an OSS Splunk App Part 2: App Packaging</a>
+    </div></div>
+</nav>
+
+
+<section class='comments'>
+  <div class='container sep-before'>
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "merbla-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'>
+          <section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/merbla' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://instagram.com/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Instagram account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+  <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/matthewerbs' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+  <rect x="2" y="9" width="4" height="12"/>
+  <circle cx="4" cy="4" r="2"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section>
+
+          <div class='copyright'>
+  <p> &copy; 2018 Matthew Erbs </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><div class='sidebar-overlay'></div><script src='/assets/js/main.89545a27.js'></script><script src='/assets/js/custom.js'></script></body>
+
+</html>
+

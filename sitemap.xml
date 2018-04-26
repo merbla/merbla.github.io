@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://merbla.com/2018/04/25/exploring-serilog-v2---using-the-http-client-factory/</loc>
+    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://merbla.com/2018/04/19/creating-an-oss-splunk-app-part-2-app-packaging/</loc>
     <lastmod>2018-04-19T00:00:00+10:00</lastmod>
   </url>
@@ -114,7 +119,7 @@
   
   <url>
     <loc>https://merbla.com/</loc>
-    <lastmod>2018-04-19T00:00:00+10:00</lastmod>
+    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
   </url>
   
   <url>
@@ -195,7 +200,7 @@
   
   <url>
     <loc>https://merbla.com/categories/exploring-serilog-v2/</loc>
-    <lastmod>2018-04-10T00:00:00+10:00</lastmod>
+    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -225,7 +230,7 @@
   
   <url>
     <loc>https://merbla.com/posts/</loc>
-    <lastmod>2018-04-19T00:00:00+10:00</lastmod>
+    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -243,7 +248,7 @@
   
   <url>
     <loc>https://merbla.com/tags/serilog/</loc>
-    <lastmod>2018-04-10T00:00:00+10:00</lastmod>
+    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   

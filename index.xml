@@ -5,10 +5,21 @@
     <link>https://merbla.com/</link>
     <description>Recent content on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 19 Apr 2018 00:00:00 +1000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Apr 2018 00:00:00 +1000</lastBuildDate>
     
 	<atom:link href="https://merbla.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Exploring Serilog v2 - Using the HTTP Client Factory</title>
+      <link>https://merbla.com/2018/04/25/exploring-serilog-v2---using-the-http-client-factory/</link>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +1000</pubDate>
+      
+      <guid>https://merbla.com/2018/04/25/exploring-serilog-v2---using-the-http-client-factory/</guid>
+      <description>This is the next post in a series re-discovering Serilog v2.
+Recently, the new HTTP Client Factory was announced as apart of the ASP.NET Core 2.1 release. There have been a number of posts relating to how it can be hooked with ASP.Net.
+ ASP.NET Core 2.1-preview1: Introducing HTTPClient factory HttpClientFactory for typed HttpClient instances in ASP.NET Core 2.1  In this post, I wanted to illustrate how you can use this new package whilst swapping in Serilog&amp;rsquo;s superior logging capabilites.</description>
+    </item>
     
     <item>
       <title>Creating an OSS Splunk App Part 2: App Packaging</title>
