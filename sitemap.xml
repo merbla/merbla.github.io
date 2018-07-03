@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://merbla.com/2018/07/01/introducing-the-docker-image-for-fitzroy/</loc>
+    <lastmod>2018-07-01T00:00:00+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://merbla.com/2018/04/25/exploring-serilog-v2---using-the-http-client-factory/</loc>
     <lastmod>2018-04-25T00:00:00+10:00</lastmod>
   </url>
@@ -78,6 +83,11 @@
   </url>
   
   <url>
+    <loc>https://merbla.com/projects/</loc>
+    <lastmod>2015-05-25T00:00:00+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://merbla.com/2015/03/17/azure-auditing/</loc>
     <lastmod>2015-03-17T23:28:00+00:00</lastmod>
   </url>
@@ -108,18 +118,13 @@
   </url>
   
   <url>
-    <loc>https://merbla.com/projects/</loc>
-    <lastmod>2014-08-27T00:00:00+10:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://merbla.com/speaking/</loc>
     <lastmod>2014-08-27T00:00:00+10:00</lastmod>
   </url>
   
   <url>
     <loc>https://merbla.com/</loc>
-    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
+    <lastmod>2018-07-01T00:00:00+10:00</lastmod>
   </url>
   
   <url>
@@ -137,6 +142,12 @@
   <url>
     <loc>https://merbla.com/tags/ad/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://merbla.com/tags/afl/</loc>
+    <lastmod>2018-07-01T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -205,6 +216,12 @@
   </url>
   
   <url>
+    <loc>https://merbla.com/tags/fitzroy/</loc>
+    <lastmod>2018-07-01T00:00:00+10:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://merbla.com/tags/github/</loc>
     <lastmod>2016-11-24T21:33:45+00:00</lastmod>
     <priority>0</priority>
@@ -230,13 +247,19 @@
   
   <url>
     <loc>https://merbla.com/posts/</loc>
-    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
+    <lastmod>2018-07-01T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://merbla.com/tags/powershell/</loc>
     <lastmod>2016-10-27T10:55:27+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://merbla.com/tags/r/</loc>
+    <lastmod>2018-07-01T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -267,6 +290,12 @@
   <url>
     <loc>https://merbla.com/tags/splunk/</loc>
     <lastmod>2015-10-12T11:34:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://merbla.com/tags/stats/</loc>
+    <lastmod>2018-07-01T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   

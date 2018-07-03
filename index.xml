@@ -5,10 +5,19 @@
     <link>https://merbla.com/</link>
     <description>Recent content on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 25 Apr 2018 00:00:00 +1000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +1000</lastBuildDate>
     
 	<atom:link href="https://merbla.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Introducing the Docker Image for fitzRoy</title>
+      <link>https://merbla.com/2018/07/01/introducing-the-docker-image-for-fitzroy/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +1000</pubDate>
+      
+      <guid>https://merbla.com/2018/07/01/introducing-the-docker-image-for-fitzroy/</guid>
+      <description>Over the past couple of months I have observed James of plusSixOne fame, create and extend the great R package for AFL stats called fitzRoy. It has been some time since I have used R and it took me a while to get up and going. Along my journey, I have tinkered with a Docker image for fitzRoy. This was primarily due to my use containers in my day to day work and wanting to isolate any of the dependencies.</description>
+    </item>
     
     <item>
       <title>Exploring Serilog v2 - Using the HTTP Client Factory</title>
@@ -171,6 +180,18 @@ Another aspect of tech I love, is structured logging. In particular the detailed
     </item>
     
     <item>
+      <title>Projects</title>
+      <link>https://merbla.com/projects/</link>
+      <pubDate>Mon, 25 May 2015 00:00:00 +1000</pubDate>
+      
+      <guid>https://merbla.com/projects/</guid>
+      <description>Open Source You can find me on GitHub and occasionally on BitBucket.
+Serilog For some time I have been fortunate to be a co-owner of the Serilog project thanks to the awesome Nick Blumbhardt. Within the organistaion I have contributed a number of sinks including Splunk and DynamoDB.
+Splunk Apps I have developed numerous Splunk apps including the popular Octopus Deploy app.
+The Tiny Tech Company Over at The Tiny Tech Company we build custom apps and solutions across a wide range of technologies and platforms.</description>
+    </item>
+    
+    <item>
       <title>Azure Auditing via PowerShell (Part 1)</title>
       <link>https://merbla.com/2015/03/17/azure-auditing/</link>
       <pubDate>Tue, 17 Mar 2015 23:28:00 +0000</pubDate>
@@ -228,15 +249,6 @@ Here is hoping that I learn something new along the way.</description>
       <guid>https://merbla.com/about/</guid>
       <description>I am consultant type that has been helping teams deliver solutions in private and government organisations for over 15 years. I live in Brisbane, Australia with my beautiful family and run The Tiny Tech Company with my wife.
 I love my sport and throw code ideas around at Github. You can also find me on Twitter.</description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
-      <link>https://merbla.com/projects/</link>
-      <pubDate>Wed, 27 Aug 2014 00:00:00 +1000</pubDate>
-      
-      <guid>https://merbla.com/projects/</guid>
-      <description>TODO</description>
     </item>
     
     <item>

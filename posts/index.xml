@@ -5,10 +5,19 @@
     <link>https://merbla.com/posts/</link>
     <description>Recent content in Posts on Get Amongst It!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 25 Apr 2018 00:00:00 +1000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +1000</lastBuildDate>
     
 	<atom:link href="https://merbla.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Introducing the Docker Image for fitzRoy</title>
+      <link>https://merbla.com/2018/07/01/introducing-the-docker-image-for-fitzroy/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +1000</pubDate>
+      
+      <guid>https://merbla.com/2018/07/01/introducing-the-docker-image-for-fitzroy/</guid>
+      <description>Over the past couple of months I have observed James of plusSixOne fame, create and extend the great R package for AFL stats called fitzRoy. It has been some time since I have used R and it took me a while to get up and going. Along my journey, I have tinkered with a Docker image for fitzRoy. This was primarily due to my use containers in my day to day work and wanting to isolate any of the dependencies.</description>
+    </item>
     
     <item>
       <title>Exploring Serilog v2 - Using the HTTP Client Factory</title>
