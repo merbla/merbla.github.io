@@ -192,14 +192,14 @@
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/devops/</loc>
-    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
+    <loc>https://merbla.com/categories/devops/</loc>
+    <lastmod>2015-06-25T10:19:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/categories/devops/</loc>
-    <lastmod>2015-06-25T10:19:00+00:00</lastmod>
+    <loc>https://merbla.com/tags/devops/</loc>
+    <lastmod>2017-04-18T06:19:52+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -264,32 +264,32 @@
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/serilog/</loc>
-    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://merbla.com/categories/serilog/</loc>
     <lastmod>2016-07-06T23:35:31+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://merbla.com/tags/splunk/</loc>
-    <lastmod>2015-10-12T11:34:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://merbla.com/tags/splunk/</loc>
-    <lastmod>2015-10-12T11:34:00+00:00</lastmod>
+    <loc>https://merbla.com/tags/serilog/</loc>
+    <lastmod>2018-04-25T00:00:00+10:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://merbla.com/categories/splunk/</loc>
     <lastmod>2016-11-07T09:53:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://merbla.com/tags/splunk/</loc>
+    <lastmod>2015-10-12T11:34:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://merbla.com/tags/splunk/</loc>
+    <lastmod>2015-10-12T11:34:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
